@@ -19,14 +19,25 @@
 4. Дождитесь, пока индикатор кнопки Bluetooth начнет мигать розово-фиолетовым цветом (5-10 секунд). 
 5. Отпустите кнопку.
 
-??? note "Видео процесса (нажмите, чтобы развернуть)"
+??? note "Видео"
     <iframe width="315" height="560" src="https://www.youtube.com/embed/K07jYDmTC7Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### 4. Смена драйвера
 1. Нажать правой кнопкой мыши на Пуск и выбрать "Диспетчер устройств".
 2. Найти устройство с названием "LEGO Technic Large hub in DFU Mode"
 3. Дважды кликнуть на устройство
-4. 
+4. Нажать на "Обновить драйвер"
+5. Нажать на "Найти драйверы на этом компьютере"
+6. Нажать на "Выбрать драйвер из списка"
+7. В списке выбрать "Устройства USB"
+8. Выбрать "Устройство WinUSB" и модель "Устройство WinUSB" и нажать "Далее"
+
+??? note "Скриншоты"
+    ![](img/i1.png){ width = 150 }
+    ![](img/i2.png){ width = 150 }
+    ![](img/i3.png){ width = 150 }
+    ![](img/i4.png){ width = 150 }
+    ![](img/i5.png){ width = 150 }
 
 ### 5. Запустите установку
 1. В левом меню редактора Pybricks нажмите кнопку **"Install Pybricks Firmware"** (значок микросхемы/загрузки).
@@ -38,8 +49,8 @@
 7. Дождитесь завершения загрузки. После установки хаб перезагрузится. \
 
 ??? note "Скриншоты"
-    6 ![](img/img1.png){ width = 200 }
-    7 ![](img/img.png){ width = 200 }
+    6 ![](img/img1.png){ width = 100 }
+    7 ![](img/img.png){ width = 150 }
 
 
 ## Как вернуть заводскую прошивку?
