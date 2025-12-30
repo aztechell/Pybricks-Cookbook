@@ -17,7 +17,7 @@
       <td><b>Technic Large Angular Motor<br>(45602)</b></td>
       <td>SPIKE Prime</td>
       <td>
-        <img src="img/large_angular_motor_45602.jpg" width="72">
+        <img src="../img/large_angular_motor_45602.jpg" width="72">
       </td>
       <td>
         175 (без нагрузки)<br>
@@ -32,7 +32,7 @@
       <td><b>Technic Medium Angular Motor<br>(45603)</b></td>
       <td>SPIKE Prime</td>
       <td>
-        <img src="img/medium_angular_motor_45603.jpg" width="72">
+        <img src="../img/medium_angular_motor_45603.jpg" width="72">
       </td>
       <td>
         185 (без нагрузки)<br>
@@ -47,7 +47,7 @@
       <td><b>Technic Large Motor<br>(88013)</b></td>
       <td>Powered UP</td>
       <td>
-        <img src="img/large_motor_88013.jpg" width="72">
+        <img src="../img/large_motor_88013.jpg" width="72">
       </td>
       <td>≈198</td>
       <td>≈8.8</td>
@@ -56,7 +56,7 @@
       <td><b>Technic XL Motor<br>(88014)</b></td>
       <td>Powered UP</td>
       <td>
-        <img src="img/xl_motor_88014.jpg" width="72">
+        <img src="../img/xl_motor_88014.jpg" width="72">
       </td>
       <td>≈198</td>
       <td>≈8.8</td>
@@ -65,7 +65,7 @@
       <td><b>Medium Angular Motor<br>(88018)</b></td>
       <td>Powered UP</td>
       <td>
-        <img src="img/medium_angular_motor_88018.jpg" width="72">
+        <img src="../img/medium_angular_motor_88018.jpg" width="72">
       </td>
       <td>≈198</td>
       <td>≈8.8</td>
@@ -74,7 +74,7 @@
       <td><b>Medium Linear Motor<br>(88008)</b></td>
       <td>Powered UP</td>
       <td>
-        <img src="img/medium_linear_motor_88008.jpg" width="72">
+        <img src="../img/medium_linear_motor_88008.jpg" width="72">
       </td>
       <td>≈270</td>
       <td>≈4.1</td>
