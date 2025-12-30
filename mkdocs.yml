@@ -23,9 +23,9 @@ nav:
       - Функции: func.md
       - Структура: structure.md
       - Drive Base: db.md
+      - Управление моторами: motors.md
   - Продвинутый код:
       - Советы: tips.md
-  - Примеры: examples.md
   - Конструкции:
     - Studio 2.0: studio.md
   
