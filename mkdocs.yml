@@ -13,6 +13,7 @@ markdown_extensions:
       alternate_style: true
 extra_css:
   - css/tabs.css
+  - css/extra.css
 nav:
   - Введение: index.md
   - Установка:
