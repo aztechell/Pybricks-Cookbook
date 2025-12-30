@@ -1,0 +1,26 @@
+site_name: AI in robotics
+theme:
+  name: readthedocs
+  logo: img/logo.png
+  favicon: img/logo.png
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+extra_css:
+  - css/tabs.css
+nav:
+  - Введение: index.md
+  - Установка:
+      - Spike PRIME hub: primehub.md
+  - Базовый код:
+      - Инициализация: init.md
+      - Функции: func.md
+      - Структура: struture.md
+      - Drive Base: db.md
+  - Конструкции:
+    - Studio 2.0: studio.md
+  
