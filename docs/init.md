@@ -59,7 +59,7 @@ right_motor = Motor(Port.B)
 # Создание базы
 # wheel_diameter: диаметр колеса в мм
 # axle_track: расстояние между центрами колес в мм
-robot = DriveBase(left_motor, right_motor, wheel_diameter=56, axle_track=112)
+drivebase = DriveBase(left_motor, right_motor, wheel_diameter=56, axle_track=112)
 ```
 
 ## 4. Инициализация Датчиков
@@ -102,6 +102,6 @@ sensor = ColorSensor(Port.C)
 
 # Логика
 print("Start!")
-robot.straight(500) # Проехать 500 мм вперед
+drivebase.straight(500) # Проехать 500 мм вперед
 wait(1000)
 ```
