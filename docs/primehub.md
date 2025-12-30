@@ -19,7 +19,8 @@
 4. Дождитесь, пока индикатор кнопки Bluetooth начнет мигать розово-фиолетовым цветом (5-10 секунд). 
 5. Отпустите кнопку.
 
-<iframe width="315" height="560" src="https://www.youtube.com/embed/K07jYDmTC7Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+??? note "Видео процесса (нажмите, чтобы развернуть)"
+    <iframe width="315" height="560" src="https://www.youtube.com/embed/K07jYDmTC7Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### 4. Смена драйвера
 1. Нажать правой кнопкой мыши на Пуск и выбрать "Диспетчер устройств".
@@ -37,11 +38,12 @@
 7. Дождитесь завершения загрузки. После установки хаб перезагрузится. \
 
 ??? note "Скриншоты"
-        7 ![]../docs/img/img.png){width = 200}
+    6 ![](../docs/img/img1.png){ width = 200 }
+    7 ![](../docs/img/img.png){ width = 200 }
 
 
 ## Как вернуть заводскую прошивку?
-Pybricks не заменяет загрузчик хаба, поэтому вы всегда можете вернуться назад.
+Pybricks не заменяет загрузчик хаба, поэтому вы всегда можете вернуться назад.    
 1. Откройте официальное приложение **LEGO® Education SPIKE™**.
 2. Подключите хаб по USB.
 3. Приложение обнаружит, что прошивка не соответствует официальной, и предложит обновить её. Нажмите "Обновить" (Update), и заводская прошивка будет восстановлена.
