@@ -1,4 +1,4 @@
-site_name: AI in robotics
+site_name: Pybricks Cookbook
 theme:
   name: readthedocs
   logo: img/logo.png
@@ -19,7 +19,7 @@ nav:
   - Базовый код:
       - Инициализация: init.md
       - Функции: func.md
-      - Структура: struture.md
+      - Структура: structure.md
       - Drive Base: db.md
   - Конструкции:
     - Studio 2.0: studio.md
