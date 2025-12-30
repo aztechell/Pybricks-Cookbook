@@ -18,6 +18,7 @@ nav:
   - Установка:
       - Spike PRIME hub: primehub.md
   - Базовый код:
+      - Создание кода: create_code.md
       - Инициализация: init.md
       - Функции: func.md
       - Структура: structure.md
