@@ -27,6 +27,7 @@ nav:
       - Управление моторами: motors.md
   - Продвинутый код:
       - Советы: tips.md
+      - Async: await_in_pybricks.md
   - Конструкции:
     - Studio 2.0: studio.md
   
