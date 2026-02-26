@@ -14,6 +14,8 @@ markdown_extensions:
 extra_css:
   - css/tabs.css
   - css/extra.css
+extra_javascript:
+  - js/arc_demo.js
 nav:
   - Введение: index.md
   - Установка:

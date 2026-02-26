@@ -2,52 +2,123 @@
   max-width: 100%;
 }
 
-.arc-signs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
-  justify-content: start;
-  align-items: start;
-  gap: 12px;
-  margin: 0.8rem 0 0.5rem;
-}
-
-.arc-sign-card {
-  width: 100%;
-  max-width: 420px;
-  margin: 0;
-  padding: 10px;
+.arc-demo {
+  margin: 0.8rem 0 0;
+  padding: 12px;
   border: 1px solid #d7dee7;
   border-radius: 10px;
-  background: #fff;
+  background: #ffffff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
-.arc-sign-card figcaption {
-  margin-bottom: 8px;
-  font-weight: 600;
-  line-height: 1.35;
+.arc-demo__controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.arc-sign-svg {
+.arc-demo__fieldset {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #d7dee7;
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.arc-demo__fieldset legend {
+  padding: 0 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.arc-demo__fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0;
+  line-height: 1.3;
+  font-size: 0.95rem;
+}
+
+.arc-demo__fieldset input[type="radio"] {
+  margin: 0;
+}
+
+.arc-demo__viewport {
+  max-width: 520px;
+  border: 1px solid #d7dee7;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fbfdff;
+}
+
+.arc-demo__svg {
   display: block;
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
   height: auto;
 }
 
-.arc-sign-note {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0.25rem 0 1rem;
+.arc-demo__meta {
+  margin-top: 8px;
 }
 
-.arc-sign-note span {
-  display: inline-block;
-  padding: 6px 10px;
+.arc-demo__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.arc-demo__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
   border-radius: 999px;
   border: 1px solid #d7dee7;
   background: #f6f9fc;
+  line-height: 1.2;
+  font-size: 0.9rem;
+}
+
+.arc-demo__current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   line-height: 1.3;
+  font-size: 0.95rem;
+}
+
+.arc-demo__swatch {
+  display: inline-block;
+  width: 14px;
+  height: 0;
+  border-top: 3px solid currentColor;
+  vertical-align: middle;
+}
+
+.arc-demo__swatch--fwd {
+  color: #198754;
+}
+
+.arc-demo__swatch--back {
+  color: #b26a00;
+  border-top-style: dashed;
+}
+
+@media (max-width: 640px) {
+  .arc-demo {
+    padding: 10px;
+  }
+
+  .arc-demo__fieldset label {
+    font-size: 0.9rem;
+  }
+
+  .arc-demo__chip,
+  .arc-demo__current {
+    font-size: 0.85rem;
+  }
 }
