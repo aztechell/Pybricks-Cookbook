@@ -2,85 +2,23 @@
 
 ## Моторы SPIKE Prime и Powered UP
 
-<table style="width:100%; table-layout:fixed; border-collapse:collapse;">
-  <thead>
-    <tr>
-      <th style="width:32%; text-align:left;">Мотор</th>
-      <th style="width:14%; text-align:left;">Система</th>
-      <th style="width:10%;">Фото</th>
-      <th style="width:22%; text-align:left;">Скорость (RPM)</th>
-      <th style="width:22%; text-align:left;">Крутящий момент (N·cm)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Technic Large Angular Motor<br>(45602)</b></td>
-      <td>SPIKE Prime</td>
-      <td>
-        <img src="../img/large_angular_motor_45602.jpg" width="72">
-      </td>
-      <td>
-        175 (без нагрузки)<br>
-        135 (макс. эффективность)
-      </td>
-      <td>
-        8 (эффективность)<br>
-        25 (стопор)
-      </td>
-    </tr>
-    <tr>
-      <td><b>Technic Medium Angular Motor<br>(45603)</b></td>
-      <td>SPIKE Prime</td>
-      <td>
-        <img src="../img/medium_angular_motor_45603.jpg" width="72">
-      </td>
-      <td>
-        185 (без нагрузки)<br>
-        135 (макс. эффективность)
-      </td>
-      <td>
-        3.5 (эффективность)<br>
-        18 (стопор)
-      </td>
-    </tr>
-    <tr>
-      <td><b>Technic Large Motor<br>(88013)</b></td>
-      <td>Powered UP</td>
-      <td>
-        <img src="../img/large_motor_88013.jpg" width="72">
-      </td>
-      <td>≈198</td>
-      <td>≈8.8</td>
-    </tr>
-    <tr>
-      <td><b>Technic XL Motor<br>(88014)</b></td>
-      <td>Powered UP</td>
-      <td>
-        <img src="../img/xl_motor_88014.jpg" width="72">
-      </td>
-      <td>≈198</td>
-      <td>≈8.8</td>
-    </tr>
-    <tr>
-      <td><b>Medium Angular Motor<br>(88018)</b></td>
-      <td>Powered UP</td>
-      <td>
-        <img src="../img/medium_angular_motor_88018.jpg" width="72">
-      </td>
-      <td>≈198</td>
-      <td>≈8.8</td>
-    </tr>
-    <tr>
-      <td><b>Medium Linear Motor<br>(88008)</b></td>
-      <td>Powered UP</td>
-      <td>
-        <img src="../img/medium_linear_motor_88008.jpg" width="72">
-      </td>
-      <td>≈270</td>
-      <td>≈4.1</td>
-    </tr>
-  </tbody>
-</table>
+!!! info "Важно про сравнение цифр"
+    В этой таблице используются **разные источники и условия измерения**:
+
+    - **SPIKE Prime 45602 / 45603**: официальные тех. характеристики LEGO Education (**7.2V**, значения с допуском `±15%`).
+    - **Powered UP 88013 / 88014 / 88008**: измерения **Philo** в точке **максимальной эффективности при 9V**.
+    - **Powered UP 88018**: на странице LEGO есть описание и совместимость, но **числовых RPM/torque нет**.
+
+| Мотор | Система | Скорость (RPM) | Крутящий момент (N·cm) | Источник / условия |
+| :--- | :--- | :--- | :--- | :--- |
+| [Technic Large Angular Motor (45602)](https://education.lego.com/en-us/products/lego-technic-large-angular-motor/45602/) | SPIKE Prime | `175` (без нагрузки)<br>`135` (макс. эффективность) | `8` (макс. эффективность)<br>`25` (стопор) | [LEGO Education Tech Specs (PDF)](https://le-www-live-s.legocdn.com/sc/media/files/support/spike-prime/techspecs_techniclargeangularmotor-1b79e2f4fbb292aaf40c97fec0c31fff.pdf)<br>`7.2V`, `±15%` |
+| [Technic Medium Angular Motor (45603)](https://education.lego.com/en-us/products/lego-technic-medium-angular-motor/45603/) | SPIKE Prime | `185` (без нагрузки)<br>`135` (макс. эффективность) | `3.5` (макс. эффективность)<br>`18` (стопор) | [LEGO Education Tech Specs (PDF)](https://le-www-live-s.legocdn.com/sc/media/files/support/spike-prime/techspecs_technicmediumangularmotor-19684ffc443792280359ef217512a1d1.pdf)<br>`7.2V`, `±15%` |
+| [Technic Large Motor (88013)](https://www.lego.com/en-us/product/technic-large-motor-88013) | Powered UP | `≈198` (макс. эффективность) | `≈8.81` (макс. эффективность) | [Philo motor comparison](https://philohome.com/motors/motorcomp.htm)<br>блок `Control+ L`, `9V` |
+| [Technic XL Motor (88014)](https://www.lego.com/en-us/product/technic-xl-motor-88014) | Powered UP | `≈198` (макс. эффективность) | `≈8.81` (макс. эффективность) | [Philo motor comparison](https://philohome.com/motors/motorcomp.htm)<br>блок `Control+ XL`, `9V` |
+| [Medium Angular Motor (88018)](https://www.lego.com/en-us/product/medium-angular-motor-88018) | Powered UP | — | — | [LEGO Shop 88018](https://www.lego.com/en-us/product/medium-angular-motor-88018)<br>на странице нет публичных RPM / torque |
+| [Medium Linear Motor (88008)](https://www.lego.com/en-us/product/medium-linear-motor-88008) | Powered UP | `≈270` (макс. эффективность) | `≈4.08` (макс. эффективность) | [Philo motor comparison](https://philohome.com/motors/motorcomp.htm)<br>блок `PUP medium`, `9V` |
+
+> Для честного сравнения моторов лучше сравнивать данные при одном напряжении и одинаковых условиях (например, все при `7.2V` или все при `9V`).
 
 ## Методы управления
 
