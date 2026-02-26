@@ -19,6 +19,7 @@ extra_javascript:
   - js/arc_demo.js
 nav:
   - Введение: index.md
+  - Словарь: glossary.md
   - Установка:
       - Spike PRIME hub: primehub.md
   - Базовый код:
