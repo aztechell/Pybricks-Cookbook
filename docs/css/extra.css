@@ -2,6 +2,33 @@
   max-width: 100%;
 }
 
+/* ReadTheDocs theme often forces nowrap inside responsive tables, which makes
+   glossary tables scroll horizontally. Allow wrapping in table cells. */
+.wy-table-responsive table td,
+.wy-table-responsive table th,
+.rst-content table td,
+.rst-content table th {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  vertical-align: top;
+}
+
+.wy-table-responsive table td code,
+.wy-table-responsive table th code,
+.rst-content table td code,
+.rst-content table th code {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Keep wrapper but prevent giant single-line rows from stretching layout. */
+.wy-table-responsive table {
+  table-layout: auto;
+  width: 100%;
+}
+
 .arc-demo {
   margin: 0.8rem 0 0;
   padding: 12px;
