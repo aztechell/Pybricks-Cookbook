@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Spike PRIME hub - Pybricks Cookbook</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/tabs.css" rel="stylesheet" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../css/arc_demo.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Spike PRIME hub";
+        var mkdocs_page_input_path = "primehub.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Введение</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Словарь</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Установка</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Spike PRIME hub</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Инструкция по установке</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1">1. Откройте редактор</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-dfu">2. Переведите хаб в режим обновления (DFU)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4">4. Смена драйвера</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5">5. Запустите установку</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Как вернуть заводскую прошивку?</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Базовый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../create_code/">Создание кода</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../init/">Инициализация</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../func/">Функции</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../structure/">Структура</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../db/">Drive Base</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motors/">Управление моторами</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Продвинутый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tips/">Советы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../await_in_pybricks/">Async</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Конструкции</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../studio/">Studio 2.0</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Pybricks Cookbook</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Установка</li>
+      <li class="breadcrumb-item active">Spike PRIME hub</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pybricks-spike-prime-hub">Установка Pybricks на Spike PRIME Hub</h1>
+<p>Установка Pybricks выполняется полностью через браузер. Вам понадобится компьютер с браузером Google Chrome или Microsoft Edge (поддержка Web Bluetooth).</p>
+<details class="note">
+<summary>Видеоинструкция</summary>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/lazylZDcnfg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</details>
+<h2 id="_1">Инструкция по установке</h2>
+<h3 id="1">1. Откройте редактор</h3>
+<p>Перейдите на сайт <a href="https://code.pybricks.com/">code.pybricks.com</a>.</p>
+<h3 id="2-dfu">2. Переведите хаб в режим обновления (DFU)</h3>
+<p>Этот шаг необходим для записи новой прошивки в память хаба.</p>
+<ol>
+<li>Убедитесь, что хаб выключен и USB-кабель <strong>отключен</strong>.</li>
+<li>Нажмите и удерживайте кнопку <strong>Bluetooth</strong> (кнопка со значком Bluetooth на передней панели).</li>
+<li>Продолжая удерживать кнопку, вставьте USB-кабель, подключенный к компьютеру.</li>
+<li>Дождитесь, пока индикатор кнопки Bluetooth начнет мигать розово-фиолетовым цветом (5-10 секунд). </li>
+<li>Отпустите кнопку.</li>
+</ol>
+<details class="note">
+<summary>Видео</summary>
+<p><iframe width="315" height="560" src="https://www.youtube.com/embed/K07jYDmTC7Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
+</details>
+<h3 id="4">4. Смена драйвера</h3>
+<ol>
+<li>Нажать правой кнопкой мыши на Пуск и выбрать "Диспетчер устройств".</li>
+<li>Найти устройство с названием "LEGO Technic Large hub in DFU Mode"</li>
+<li>Дважды кликнуть на устройство</li>
+<li>Нажать на "Обновить драйвер"</li>
+<li>Нажать на "Найти драйверы на этом компьютере"</li>
+<li>Нажать на "Выбрать драйвер из списка"</li>
+<li>В списке выбрать "Устройства USB"</li>
+<li>Выбрать "Устройство WinUSB" и модель "Устройство WinUSB" и нажать "Далее"</li>
+</ol>
+<details class="note">
+<summary>Скриншоты</summary>
+<p><img alt="" src="../img/i1.png" width="width" />
+<img alt="" src="../img/i2.png" width="width" />
+<img alt="" src="../img/i3.png" width="width" />
+<img alt="" src="../img/i4.png" width="width" />
+<img alt="" src="../img/i5.png" width="width" /></p>
+</details>
+<h3 id="5">5. Запустите установку</h3>
+<ol>
+<li>В левом меню редактора Pybricks нажмите кнопку <strong>"Install Pybricks Firmware"</strong> (значок микросхемы/загрузки).</li>
+<li>В списке устройств выберите <strong>"SPIKE Prime Hub"</strong>.</li>
+<li>Поставьте галочку под лицензией и нажмите <strong>Next</strong>.</li>
+<li>Задайте имя для хаба. </li>
+<li>Нажмите синюю кнопку <strong>"Install"</strong>.</li>
+<li>В системном окне выбора устройства выберите ваш хаб и нажмите "Подключение".</li>
+<li>Дождитесь завершения загрузки. После установки хаб перезагрузится. \</li>
+</ol>
+<details class="note">
+<summary>Скриншоты</summary>
+<p>6 <img alt="" src="../img/img1.png" width="width" />
+7 <img alt="" src="../img/img.png" width="width" /></p>
+</details>
+<h2 id="_2">Как вернуть заводскую прошивку?</h2>
+<p>Pybricks не заменяет загрузчик хаба, поэтому вы всегда можете вернуться назад.  <br />
+1. Откройте официальное приложение <strong>LEGO® Education SPIKE™</strong>.<br />
+2. Подключите хаб по USB. <br />
+3. Приложение обнаружит, что прошивка не соответствует официальной, и предложит обновить её. Нажмите "Обновить" (Update), и заводская прошивка будет восстановлена.   </p>
+<p>Также можно вернуть оригинальную прошивку в Pybricks в пункте "Restore Official LEGO Firmware".   </p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../glossary/" class="btn btn-neutral float-left" title="Словарь"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../create_code/" class="btn btn-neutral float-right" title="Создание кода">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../glossary/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../create_code/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/arc_demo.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

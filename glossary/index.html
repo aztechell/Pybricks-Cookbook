@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Словарь - Pybricks Cookbook</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/tabs.css" rel="stylesheet" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../css/arc_demo.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u0421\u043b\u043e\u0432\u0430\u0440\u044c";
+        var mkdocs_page_input_path = "glossary.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Введение</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Словарь</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#python-pybricks">Основы программирования (Python в Pybricks)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pybricks_1">Базовые объекты Pybricks (для чтения примеров)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Датчики и ориентация</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Движение и геометрия</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Навигация, состояние и измерения</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">Управление движением (команды и режимы)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#-">Мини-подсказка по чтению примеров</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">Продвинутые робототехнические термины</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">Навигация и карты</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">Оценка состояния и сенсоры (продвинутый уровень)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">Управление и регулирование</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_9">Кинематика и механика</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pybricks_2">Как использовать эти термины в контексте Pybricks</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Установка</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../primehub/">Spike PRIME hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Базовый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../create_code/">Создание кода</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../init/">Инициализация</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../func/">Функции</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../structure/">Структура</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../db/">Drive Base</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motors/">Управление моторами</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Продвинутый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tips/">Советы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../await_in_pybricks/">Async</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Конструкции</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../studio/">Studio 2.0</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Pybricks Cookbook</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Словарь</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pybricks">Словарь терминов (Pybricks)</h1>
+<p>Короткий справочник по базовым терминам, которые часто встречаются в робототехнике и в Pybricks.</p>
+<p>Колонка <strong>"Где в Pybricks"</strong> показывает, в каком модуле/классе/методе это обычно используется.</p>
+<h2 id="python-pybricks">Основы программирования (Python в Pybricks)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Алгоритм</strong></td>
+<td style="text-align: left;">Пошаговый план действий программы для решения задачи (например: поехать, измерить, повернуть, остановиться).</td>
+<td style="text-align: left;">Это не отдельный объект Pybricks; алгоритм пишется обычным Python-кодом в ваших <code>.py</code> файлах</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Цикл</strong></td>
+<td style="text-align: left;">Повторение блока кода несколько раз или пока выполняется условие.</td>
+<td style="text-align: left;">Python: <code>for</code>, <code>while</code> (используется в программах на Pybricks повсюду)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Итерация</strong></td>
+<td style="text-align: left;">Один проход цикла.</td>
+<td style="text-align: left;">Любой <code>for</code> / <code>while</code> в Python-коде</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Бесконечный цикл</strong></td>
+<td style="text-align: left;">Цикл, который работает постоянно, пока программа не остановлена.</td>
+<td style="text-align: left;">Обычно <code>while True:</code> (часто с <code>wait(...)</code>, чтобы не перегружать CPU)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Условие</strong></td>
+<td style="text-align: left;">Проверка <code>True/False</code>, от которой зависит поведение программы.</td>
+<td style="text-align: left;">Python: <code>if</code>, <code>elif</code>, <code>else</code>; часто с данными датчиков</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ветвление</strong></td>
+<td style="text-align: left;">Выбор одного из нескольких путей выполнения по условию.</td>
+<td style="text-align: left;">Python: <code>if / elif / else</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Переменная</strong></td>
+<td style="text-align: left;">Имя для хранения данных (числа, текста, состояния, показаний датчика и т.д.).</td>
+<td style="text-align: left;">Обычный Python (<code>distance = drive_base.distance()</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Логический тип (<code>bool</code>)</strong></td>
+<td style="text-align: left;">Тип данных с двумя значениями: <code>True</code> или <code>False</code>. Часто используется в условиях и флагах состояния.</td>
+<td style="text-align: left;">Обычный Python (<code>if drive_base.done(): ...</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Функция</strong></td>
+<td style="text-align: left;">Переиспользуемый блок кода с именем. Помогает не дублировать действия.</td>
+<td style="text-align: left;">Python: <code>def ...</code>; см. <code>docs/func.md</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Параметр</strong></td>
+<td style="text-align: left;">Имя переменной в определении функции.</td>
+<td style="text-align: left;">Python: <code>def drive_distance(distance_mm, speed):</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Аргумент</strong></td>
+<td style="text-align: left;">Конкретное значение, которое передают в функцию при вызове.</td>
+<td style="text-align: left;">Python: <code>drive_distance(500, 200)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Возврат значения (<code>return</code>)</strong></td>
+<td style="text-align: left;">Команда, которая возвращает результат из функции.</td>
+<td style="text-align: left;">Python: <code>return</code>; часто для обработки показаний датчиков</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Класс (<code>class</code>)</strong></td>
+<td style="text-align: left;">Шаблон/тип объекта, который описывает данные и методы.</td>
+<td style="text-align: left;">Python и API Pybricks: <code>Motor</code>, <code>DriveBase</code>, <code>PrimeHub</code> и т.д.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Объект (экземпляр)</strong></td>
+<td style="text-align: left;">Конкретный созданный экземпляр класса.</td>
+<td style="text-align: left;"><code>left_motor = Motor(...)</code>, <code>drive_base = DriveBase(...)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Метод</strong></td>
+<td style="text-align: left;">Функция, принадлежащая объекту/классу.</td>
+<td style="text-align: left;"><code>drive_base.straight(...)</code>, <code>motor.run(...)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Модуль</strong></td>
+<td style="text-align: left;">Файл/библиотека с кодом, который можно импортировать.</td>
+<td style="text-align: left;"><code>import</code> / <code>from ... import ...</code>, например <code>from pybricks.tools import wait</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Импорт</strong></td>
+<td style="text-align: left;">Подключение модуля, класса или функции в текущий файл.</td>
+<td style="text-align: left;">Python: <code>import</code>, <code>from ... import ...</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Конечный автомат (<code>FSM</code>, state machine)</strong></td>
+<td style="text-align: left;">Способ организации логики, где робот находится в одном из состояний и переключается между ними по условиям.</td>
+<td style="text-align: left;">Пользовательская логика на Python (часто полезно в сложных миссиях)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pybricks_1">Базовые объекты Pybricks (для чтения примеров)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Хаб (Hub)</strong></td>
+<td style="text-align: left;">"Мозг" робота: запускает программу, содержит IMU, кнопки, дисплей/индикаторы (зависит от модели).</td>
+<td style="text-align: left;"><code>PrimeHub</code>, <code>InventorHub</code>, <code>TechnicHub</code> и др.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Порт (<code>Port</code>)</strong></td>
+<td style="text-align: left;">Разъем хаба, к которому подключают моторы и датчики.</td>
+<td style="text-align: left;"><code>pybricks.parameters.Port</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Направление мотора (<code>Direction</code>)</strong></td>
+<td style="text-align: left;">Указывает, какое вращение считать положительным для конкретной установки мотора.</td>
+<td style="text-align: left;"><code>pybricks.parameters.Direction</code>, <code>Motor(..., Direction.CLOCKWISE/COUNTERCLOCKWISE)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Задержка (<code>wait</code>)</strong></td>
+<td style="text-align: left;">Пауза в коде (в миллисекундах), полезна в циклах опроса датчиков.</td>
+<td style="text-align: left;"><code>pybricks.tools.wait(ms)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">Датчики и ориентация</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Датчик</strong></td>
+<td style="text-align: left;">Устройство, которое измеряет что-то из окружающей среды или состояния робота (цвет, расстояние, сила, угол, скорость и т.п.).</td>
+<td style="text-align: left;"><code>pybricks.pupdevices</code> (<code>ColorSensor</code>, <code>UltrasonicSensor</code>, <code>ForceSensor</code>), а также IMU в <code>PrimeHub</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Гироскоп</strong></td>
+<td style="text-align: left;">Датчик угловой скорости. Помогает понимать, как робот поворачивается.</td>
+<td style="text-align: left;">В составе IMU хаба: <code>PrimeHub().imu</code>; также используется через <code>DriveBase.use_gyro()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IMU</strong></td>
+<td style="text-align: left;">Инерциальный модуль (обычно включает гироскоп и акселерометр). Дает данные об ориентации/движении хаба.</td>
+<td style="text-align: left;"><code>PrimeHub().imu</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Акселерометр</strong></td>
+<td style="text-align: left;">Часть IMU, измеряет ускорение. Полезен для оценки наклона/рывков/движения.</td>
+<td style="text-align: left;"><code>PrimeHub().imu</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ориентация (<code>orientation</code>)</strong></td>
+<td style="text-align: left;">Как повернут робот/хаб в пространстве. В плоских задачах часто важен только поворот вокруг вертикальной оси.</td>
+<td style="text-align: left;">Чаще через IMU хаба (<code>PrimeHub().imu</code>) и/или <code>DriveBase.angle()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Yaw / Pitch / Roll</strong></td>
+<td style="text-align: left;">Три угла ориентации: рыскание, тангаж и крен. Для движения по полу чаще всего важен <code>yaw</code> (поворот влево/вправо).</td>
+<td style="text-align: left;">Термины IMU/робототехники; в Pybricks относятся к данным хаба с IMU</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Энкодер</strong></td>
+<td style="text-align: left;">Датчик внутри мотора, который считает вращение вала (угол/скорость). Основа для точного движения.</td>
+<td style="text-align: left;">В <code>Motor</code> (энкодер используется методами мотора и <code>DriveBase</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Калибровка</strong></td>
+<td style="text-align: left;">Подстройка параметров робота, чтобы движение в мм/градусах было точнее.</td>
+<td style="text-align: left;">Для базы: параметры <code>wheel_diameter</code>, <code>axle_track</code>, методы <code>DriveBase.settings()</code> и практическая настройка</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Порог (<code>threshold</code>)</strong></td>
+<td style="text-align: left;">Значение, выше/ниже которого программа считает, что произошло событие (например, "линия найдена", "слишком близко").</td>
+<td style="text-align: left;">Пользовательская логика с <code>if</code>, обычно по данным датчиков (<code>ColorSensor</code>, <code>UltrasonicSensor</code> и т.д.)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Шум (<code>noise</code>)</strong></td>
+<td style="text-align: left;">Случайные колебания измерений датчика, из-за которых показания немного "прыгают".</td>
+<td style="text-align: left;">Наблюдается у любых датчиков; учитывается в логике чтения/обработки</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Фильтрация (<code>filtering</code>)</strong></td>
+<td style="text-align: left;">Обработка данных датчика для уменьшения шума и ложных срабатываний.</td>
+<td style="text-align: left;">Пользовательская логика (например, усреднение нескольких измерений)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Сглаживание / усреднение (<code>smoothing</code>, averaging)</strong></td>
+<td style="text-align: left;">Простая форма фильтрации: несколько измерений объединяют в одно более стабильное значение.</td>
+<td style="text-align: left;">Пользовательская логика в Python (циклы, списки, вычисление среднего)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Гистерезис порога</strong></td>
+<td style="text-align: left;">Использование двух порогов (вкл/выкл), чтобы значение не "дребезжало" около границы.</td>
+<td style="text-align: left;">Пользовательская логика с <code>if</code> и состоянием (<code>bool</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Дребезг (<code>debounce</code>)</strong></td>
+<td style="text-align: left;">Короткие повторные срабатывания кнопки/датчика, которые нужно игнорировать или сгладить.</td>
+<td style="text-align: left;">Циклы опроса + <code>wait(...)</code>, проверки времени/состояния</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Частота опроса датчика / дискретизация (<code>sampling rate</code>)</strong></td>
+<td style="text-align: left;">Как часто вы читаете датчик. Слишком редко — медленно реагирует, слишком часто — больше шума/нагрузки.</td>
+<td style="text-align: left;">Пользовательская логика с <code>wait(ms)</code> и циклом опроса</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">Движение и геометрия</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>DriveBase (приводная база)</strong></td>
+<td style="text-align: left;">Абстракция для двухколесного робота: движение в мм и градусах вместо "оборотов мотора".</td>
+<td style="text-align: left;"><code>pybricks.robotics.DriveBase</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Радиус дуги</strong></td>
+<td style="text-align: left;">Расстояние от робота до центра окружности, по которой он едет.</td>
+<td style="text-align: left;"><code>DriveBase.arc(radius, ...)</code>, <code>DriveBase.curve(radius, angle)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Дуга</strong></td>
+<td style="text-align: left;">Движение по части окружности, а не по прямой.</td>
+<td style="text-align: left;"><code>DriveBase.arc(...)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Поворот на месте</strong></td>
+<td style="text-align: left;">Робот вращается вокруг своей оси, почти не смещаясь по прямой.</td>
+<td style="text-align: left;"><code>DriveBase.turn(angle)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Колея (<code>axle_track</code>)</strong></td>
+<td style="text-align: left;">Расстояние между левым и правым колесом (по центрам). Сильно влияет на точность поворота.</td>
+<td style="text-align: left;">Параметр при создании <code>DriveBase(..., axle_track=...)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Диаметр колеса (<code>wheel_diameter</code>)</strong></td>
+<td style="text-align: left;">Используется для пересчета вращения мотора в миллиметры пути.</td>
+<td style="text-align: left;">Параметр при создании <code>DriveBase(..., wheel_diameter=...)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Скорость (линейная)</strong></td>
+<td style="text-align: left;">Насколько быстро робот едет вперед/назад (обычно в <code>mm/s</code>).</td>
+<td style="text-align: left;"><code>DriveBase.drive(speed, turn_rate)</code>, <code>DriveBase.settings(straight_speed=...)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Скорость поворота (<code>turn_rate</code>)</strong></td>
+<td style="text-align: left;">Насколько быстро робот поворачивает (обычно в <code>deg/s</code>).</td>
+<td style="text-align: left;"><code>DriveBase.drive(speed, turn_rate)</code>, <code>DriveBase.settings(turn_rate=...)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ускорение</strong></td>
+<td style="text-align: left;">Как быстро меняется скорость. Слишком большое значение может быть недостижимо физически.</td>
+<td style="text-align: left;"><code>DriveBase.settings(straight_acceleration=..., turn_acceleration=...)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">Навигация, состояние и измерения</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Одометрия</strong></td>
+<td style="text-align: left;">Оценка пройденного пути и поворота робота по энкодерам (и иногда с помощью гироскопа).</td>
+<td style="text-align: left;"><code>DriveBase.distance()</code>, <code>DriveBase.angle()</code>, <code>DriveBase.state()</code>, <code>DriveBase.reset()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Телеметрия</strong></td>
+<td style="text-align: left;">Текущие данные о состоянии робота во время работы (скорость, угол, дистанция, показания датчиков и т.п.).</td>
+<td style="text-align: left;">Нет отдельного "класса телеметрии"; обычно используют <code>DriveBase.state()</code>, <code>distance()</code>, <code>angle()</code>, чтение датчиков и <code>print()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Состояние (<code>state</code>)</strong></td>
+<td style="text-align: left;">Набор текущих параметров движения базы (дистанция, скорость, угол, скорость поворота).</td>
+<td style="text-align: left;"><code>DriveBase.state()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Дистанция (<code>distance</code>)</strong></td>
+<td style="text-align: left;">Сколько база прошла с момента последнего сброса одометрии.</td>
+<td style="text-align: left;"><code>DriveBase.distance()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Угол (<code>angle</code>)</strong></td>
+<td style="text-align: left;">Накопленный угол поворота базы с момента <code>reset()</code>.</td>
+<td style="text-align: left;"><code>DriveBase.angle()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Курс (<code>heading</code>)</strong></td>
+<td style="text-align: left;">Текущее направление, куда "смотрит" робот. В простых проектах часто оценивают по одометрии/гироскопу.</td>
+<td style="text-align: left;">Обычно пользовательская логика на основе <code>DriveBase.angle()</code> и/или IMU</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Сброс одометрии</strong></td>
+<td style="text-align: left;">Обнуление (или установка) текущих значений дистанции и угла.</td>
+<td style="text-align: left;"><code>DriveBase.reset()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Завершена ли команда</strong></td>
+<td style="text-align: left;">Проверка, закончила ли база текущий маневр.</td>
+<td style="text-align: left;"><code>DriveBase.done()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Застревание (<code>stalled</code>)</strong></td>
+<td style="text-align: left;">Ситуация, когда робот уперся/не может выполнить движение как задано.</td>
+<td style="text-align: left;"><code>DriveBase.stalled()</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">Управление движением (команды и режимы)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Блокирующий режим</strong></td>
+<td style="text-align: left;">Команда ждет завершения движения, и код идет дальше только после этого.</td>
+<td style="text-align: left;"><code>DriveBase.straight(...)</code>, <code>turn(...)</code>, <code>arc(...)</code> (по умолчанию <code>wait=True</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Неблокирующий режим</strong></td>
+<td style="text-align: left;">Команда запускает движение и сразу возвращает управление, пока робот еще едет.</td>
+<td style="text-align: left;"><code>... , wait=False</code> + проверка через <code>DriveBase.done()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Опрос (<code>polling</code>)</strong></td>
+<td style="text-align: left;">Периодическая проверка состояния в цикле (например, <code>done()</code> или показаний датчика).</td>
+<td style="text-align: left;">Циклы <code>while</code> + <code>wait(...)</code>, <code>DriveBase.done()</code>, методы датчиков</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Период цикла / частота цикла</strong></td>
+<td style="text-align: left;">Как часто выполняется цикл управления/опроса (например, каждые 10 мс). Влияет на задержку и плавность реакции.</td>
+<td style="text-align: left;">Пользовательская логика с <code>wait(ms)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Остановка накатом (<code>coast</code>)</strong></td>
+<td style="text-align: left;">Моторы перестают активно удерживать/тормозить, робот докатывается.</td>
+<td style="text-align: left;"><code>DriveBase.stop()</code>, <code>Stop.COAST</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Торможение (<code>brake</code>)</strong></td>
+<td style="text-align: left;">Пассивное торможение моторов для более быстрой остановки.</td>
+<td style="text-align: left;"><code>DriveBase.brake()</code>, <code>Stop.BRAKE</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Удержание (<code>hold</code>)</strong></td>
+<td style="text-align: left;">Активное удержание позиции моторами после завершения движения.</td>
+<td style="text-align: left;"><code>Stop.HOLD</code> (часто режим по умолчанию для маневров)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Режим остановки (<code>then=Stop...</code>)</strong></td>
+<td style="text-align: left;">Что делать после <code>straight/turn/arc</code>: держать, тормозить или накат.</td>
+<td style="text-align: left;"><code>pybricks.parameters.Stop</code>, аргумент <code>then=</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Команда <code>drive()</code></strong></td>
+<td style="text-align: left;">Непрерывное движение с заданной линейной и угловой скоростью до <code>stop()</code>/<code>brake()</code>.</td>
+<td style="text-align: left;"><code>DriveBase.drive(speed, turn_rate)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-">Мини-подсказка по чтению примеров</h2>
+<p>Если в коде встречается:</p>
+<ul>
+<li><code>distance</code>, <code>angle</code>, <code>state</code> -&gt; это обычно про <strong>одометрию/телеметрию</strong> базы.</li>
+<li><code>use_gyro(True)</code> -&gt; база использует <strong>гироскоп (IMU)</strong> хаба для поворотов/удержания курса.</li>
+<li><code>wait=False</code> + <code>done()</code> -&gt; это <strong>неблокирующий режим</strong> движения.</li>
+</ul>
+<h2 id="_5">Продвинутые робототехнические термины</h2>
+<p>Эти термины чаще встречаются в общей робототехнике, ROS, компьютерном зрении и автономной навигации.<br />
+В Pybricks многие из них не представлены как готовые классы, но идеи полезно понимать.</p>
+<h3 id="_6">Навигация и карты</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SLAM</strong></td>
+<td style="text-align: left;">Simultaneous Localization and Mapping: робот одновременно строит карту и определяет свое положение на ней.</td>
+<td style="text-align: left;">Нет готового SLAM в Pybricks; это обычно внешние фреймворки/ПК</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Локализация (<code>localization</code>)</strong></td>
+<td style="text-align: left;">Определение положения робота на карте/в пространстве.</td>
+<td style="text-align: left;">Частично вручную через одометрию (<code>DriveBase.distance/angle/state</code>) и датчики</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Картографирование (<code>mapping</code>)</strong></td>
+<td style="text-align: left;">Построение карты окружающей среды.</td>
+<td style="text-align: left;">Нет встроенного API; реализуют самостоятельно/вне Pybricks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Поза (<code>pose</code>)</strong></td>
+<td style="text-align: left;">Положение и ориентация робота (например, <code>x</code>, <code>y</code>, <code>угол</code>).</td>
+<td style="text-align: left;">В Pybricks напрямую не хранится как объект; можно вычислять из одометрии</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Маршрутная точка (<code>waypoint</code>)</strong></td>
+<td style="text-align: left;">Промежуточная точка, через которую робот должен проехать.</td>
+<td style="text-align: left;">Обычно логика пользователя (список точек в Python)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Планирование пути (<code>path planning</code>)</strong></td>
+<td style="text-align: left;">Поиск пути от точки A к точке B с учетом препятствий.</td>
+<td style="text-align: left;">Нет встроенного планировщика; пользовательская логика</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Планирование траектории (<code>trajectory planning</code>)</strong></td>
+<td style="text-align: left;">Планирование пути плюс профиля скоростей/времени движения.</td>
+<td style="text-align: left;">Частично вручную через <code>DriveBase.settings()</code> и последовательности команд</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Карта занятости (<code>occupancy grid</code>)</strong></td>
+<td style="text-align: left;">Сетка, где ячейки отмечены как свободные/занятые/неизвестные.</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Замыкание петли (<code>loop closure</code>)</strong></td>
+<td style="text-align: left;">Распознавание, что робот вернулся в уже известное место, чтобы исправить накопленные ошибки карты/позиции.</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">Оценка состояния и сенсоры (продвинутый уровень)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Слияние датчиков (<code>sensor fusion</code>)</strong></td>
+<td style="text-align: left;">Объединение данных нескольких датчиков для более точной оценки состояния.</td>
+<td style="text-align: left;">Частично возможно вручную (IMU + энкодеры + датчики), но без готового фреймворка</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Dead reckoning</strong></td>
+<td style="text-align: left;">Оценка текущего положения по предыдущему положению и измеренному движению (без внешних ориентиров).</td>
+<td style="text-align: left;">По сути близко к одометрии <code>DriveBase</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Дрейф (<code>drift</code>)</strong></td>
+<td style="text-align: left;">Накопление ошибки измерений/оценки положения со временем.</td>
+<td style="text-align: left;">Наблюдается в одометрии и гироскопических измерениях</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ковариация (<code>covariance</code>)</strong></td>
+<td style="text-align: left;">Численная оценка неопределенности измерений/оценки состояния.</td>
+<td style="text-align: left;">Не представлена как стандартный объект Pybricks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EKF (Extended Kalman Filter)</strong></td>
+<td style="text-align: left;">Расширенный фильтр Калмана для оценки состояния в нелинейных системах.</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UKF (Unscented Kalman Filter)</strong></td>
+<td style="text-align: left;">Вариант фильтра Калмана для нелинейных систем (через sigma points).</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LiDAR</strong></td>
+<td style="text-align: left;">Лазерный дальномер/сканер для измерения расстояний и построения карты.</td>
+<td style="text-align: left;">Для стандартных наборов Pybricks обычно не используется напрямую</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Облако точек (<code>point cloud</code>)</strong></td>
+<td style="text-align: left;">Набор 2D/3D точек, полученных сенсором (например, LiDAR/камера глубины).</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>VO (Visual Odometry)</strong></td>
+<td style="text-align: left;">Оценка перемещения по изображениям с камеры.</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>VIO (Visual-Inertial Odometry)</strong></td>
+<td style="text-align: left;">Одометрия по камере + IMU.</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">Управление и регулирование</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>PID-регулятор</strong></td>
+<td style="text-align: left;">Алгоритм управления по ошибке: пропорциональная, интегральная и дифференциальная части.</td>
+<td style="text-align: left;">Концептуально используется в робототехнике; в Pybricks можно реализовать вручную</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Уставка (<code>setpoint</code>)</strong></td>
+<td style="text-align: left;">Целевое значение (скорость, угол, дистанция), к которому стремится система.</td>
+<td style="text-align: left;">В пользовательской логике и в командах движения (<code>straight</code>, <code>turn</code>, <code>drive</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Обратная связь (<code>feedback</code>)</strong></td>
+<td style="text-align: left;">Управление на основе измерений датчиков/состояния.</td>
+<td style="text-align: left;">Чтение датчиков, <code>DriveBase.state()</code>, IMU, энкодеры</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Упреждение (<code>feedforward</code>)</strong></td>
+<td style="text-align: left;">Добавка к управлению на основе модели/ожидаемого поведения, без ожидания ошибки.</td>
+<td style="text-align: left;">Обычно реализуют вручную в пользовательском коде</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Перерегулирование (<code>overshoot</code>)</strong></td>
+<td style="text-align: left;">Когда система превышает целевое значение перед стабилизацией.</td>
+<td style="text-align: left;">Может проявляться в поворотах/движении при агрессивных настройках</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Устойчивость (<code>stability</code>)</strong></td>
+<td style="text-align: left;">Способность системы возвращаться к нужному режиму без раскачки/разгона ошибки.</td>
+<td style="text-align: left;">Общая теория; влияет на настройку алгоритмов управления</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Задержка (<code>latency</code>)</strong></td>
+<td style="text-align: left;">Время между измерением, вычислением и действием.</td>
+<td style="text-align: left;">Есть в любых циклах опроса датчиков и управления (<code>wait(...)</code>, частота цикла)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MPC (Model Predictive Control)</strong></td>
+<td style="text-align: left;">Управление по модели с прогнозом будущего поведения на горизонте времени.</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">Кинематика и механика</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Термин</th>
+<th style="text-align: left;">Что это значит</th>
+<th style="text-align: left;">Где в Pybricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Кинематика</strong></td>
+<td style="text-align: left;">Описание движения без учета сил (положения, скорости, углы).</td>
+<td style="text-align: left;">Полезно для <code>DriveBase</code>, манипуляторов и расчетов движения</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Прямая кинематика (<code>forward kinematics</code>)</strong></td>
+<td style="text-align: left;">Вычисление положения механизма по известным углам/положениям приводов.</td>
+<td style="text-align: left;">Обычно пользовательские расчеты</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Обратная кинематика (<code>inverse kinematics</code>)</strong></td>
+<td style="text-align: left;">Вычисление углов/команд приводов для достижения нужного положения.</td>
+<td style="text-align: left;">Обычно пользовательские расчеты</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Степени свободы (<code>DOF</code>)</strong></td>
+<td style="text-align: left;">Количество независимых направлений/осей движения системы.</td>
+<td style="text-align: left;">Общая робототехника; полезно при описании манипуляторов</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Дифференциальный привод (<code>differential drive</code>)</strong></td>
+<td style="text-align: left;">Двухколесная схема управления, где поворот задается разницей скоростей колес.</td>
+<td style="text-align: left;"><code>pybricks.robotics.DriveBase</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Skid-steer (танковый / бортовой поворот)</strong></td>
+<td style="text-align: left;">Поворот за счет разницы скоростей левой и правой стороны (часто 4 колеса или гусеницы), обычно с проскальзыванием.</td>
+<td style="text-align: left;">Можно реализовать вручную через несколько <code>Motor</code>; отдельного класса уровня <code>DriveBase</code> обычно нет</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ackermann steering (автомобильное руление)</strong></td>
+<td style="text-align: left;">Схема как у автомобиля: отдельное руление передних колес и привод на ось(и).</td>
+<td style="text-align: left;">Обычно пользовательская логика: рулевой мотор + приводной мотор(ы)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Омни-привод (<code>omni drive</code>)</strong></td>
+<td style="text-align: left;">База с omni-колесами, позволяющая двигаться в нескольких направлениях (в зависимости от конфигурации).</td>
+<td style="text-align: left;">Нет готового универсального класса; нужна своя кинематика и управление моторами</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mecanum drive</strong></td>
+<td style="text-align: left;">База с mecanum-колесами для движения вбок/по диагонали и вращения на месте.</td>
+<td style="text-align: left;">Нет встроенной поддержки в <code>DriveBase</code>; реализуется вручную через кинематику колес</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Swerve drive</strong></td>
+<td style="text-align: left;">Каждое колесо (или модуль) может отдельно поворачиваться и крутиться, что дает очень гибкое движение.</td>
+<td style="text-align: left;">Нет встроенной поддержки в Pybricks; сложная пользовательская кинематика</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Гусеничный привод (<code>tracked drive</code>)</strong></td>
+<td style="text-align: left;">Движение на гусеницах вместо колес; хорошо для проходимости, но часто с большим проскальзыванием.</td>
+<td style="text-align: left;">Может управляться как <code>skid-steer</code> через моторы; <code>DriveBase</code> не всегда дает точную модель</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Holonomic / Nonholonomic</strong></td>
+<td style="text-align: left;">Может/не может двигаться мгновенно в любом направлении из текущего состояния (например, <code>mecanum</code> часто holonomic, <code>differential drive</code> — nonholonomic).</td>
+<td style="text-align: left;"><code>DriveBase</code> (дифференциальный) — nonholonomic</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Передаточное отношение (<code>gear ratio</code>)</strong></td>
+<td style="text-align: left;">Соотношение между скоростью/моментом на входе и выходе передачи. Влияет на тягу и скорость.</td>
+<td style="text-align: left;">Практически важно при проектировании механики и интерпретации движений моторов</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Редуктор</strong></td>
+<td style="text-align: left;">Механическая передача (обычно шестерни), которая меняет скорость и крутящий момент.</td>
+<td style="text-align: left;">В конструкции робота; влияет на поведение <code>Motor</code> и всей базы</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Крутящий момент (<code>torque</code>)</strong></td>
+<td style="text-align: left;">"Сила вращения" на валу. Чем выше момент, тем легче двигать нагрузку.</td>
+<td style="text-align: left;">Практическое понятие при выборе передачи/мотора и настройке движения</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Проскальзывание колес (<code>wheel slip</code>)</strong></td>
+<td style="text-align: left;">Колеса вращаются, но фактическое движение меньше расчетного.</td>
+<td style="text-align: left;">Практически влияет на точность <code>DriveBase</code> и одометрии</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Люфт (<code>backlash</code>)</strong></td>
+<td style="text-align: left;">Механический зазор в передаче, вызывающий задержку/неточность при смене направления.</td>
+<td style="text-align: left;">Практически влияет на точность движений и позиционирования</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Гистерезис (<code>hysteresis</code>)</strong></td>
+<td style="text-align: left;">Отклик системы зависит от предыстории движения/нагрузки.</td>
+<td style="text-align: left;">Практически наблюдается в механике и датчиках</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pybricks_2">Как использовать эти термины в контексте Pybricks</h3>
+<ul>
+<li>Для учебных проектов на Pybricks чаще всего достаточно: <strong>одометрия</strong>, <strong>дрейф</strong>, <strong>PID</strong>, <strong>уставка</strong>, <strong>обратная связь</strong>, <strong>дифференциальный привод</strong>, <strong>проскальзывание</strong>.</li>
+<li>Термины вроде <strong>SLAM</strong>, <strong>EKF</strong>, <strong>MPC</strong>, <strong>VIO</strong> полезны для понимания "куда дальше расти", но обычно выходят за рамки базового хаба и MicroPython-скрипта.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Введение"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../primehub/" class="btn btn-neutral float-right" title="Spike PRIME hub">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../primehub/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/arc_demo.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

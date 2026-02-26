@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Drive Base - Pybricks Cookbook</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/tabs.css" rel="stylesheet" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../css/arc_demo.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Drive Base";
+        var mkdocs_page_input_path = "db.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Введение</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Словарь</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Установка</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../primehub/">Spike PRIME hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Базовый код</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../create_code/">Создание кода</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../init/">Инициализация</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../func/">Функции</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../structure/">Структура</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Drive Base</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Инициализация</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Единицы измерения и знаки</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Основные методы движения</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#thenstop">Режим остановки после маневра (then=Stop...)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">Блокирующий и неблокирующий режим</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#settings">Настройка динамики: settings()</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#settings_1">Ограничения settings()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#88-44-624">Расчет для колес 88, 44, 62.4 мм</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">Телеметрия и состояние</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#reset">Сброс одометрии: reset()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use_gyro">Использование гироскопа: use_gyro()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">Практическая калибровка размеров</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#curve-arc">curve() и arc(): в чем разница</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">Сигнатуры</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">Логика знаков</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-">Мини-примеры миграции</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#drive_basearcradius-angle">Наглядно: drive_base.arc(radius, angle=...)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motors/">Управление моторами</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Продвинутый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tips/">Советы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../await_in_pybricks/">Async</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Конструкции</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../studio/">Studio 2.0</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Pybricks Cookbook</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Базовый код</li>
+      <li class="breadcrumb-item active">Drive Base</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="drive-base">Drive Base</h1>
+<p><code>DriveBase</code> в Pybricks позволяет управлять двухколесным роботом в миллиметрах и градусах, а не в оборотах моторов.</p>
+<h2 id="_1">Инициализация</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.pupdevices</span><span class="w"> </span><span class="kn">import</span> <span class="n">Motor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Port</span><span class="p">,</span> <span class="n">Direction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.robotics</span><span class="w"> </span><span class="kn">import</span> <span class="n">DriveBase</span>
+
+<span class="c1"># Подберите направления так, чтобы при положительной скорости робот ехал вперед.</span>
+<span class="n">left_motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">COUNTERCLOCKWISE</span><span class="p">)</span>
+<span class="n">right_motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+<span class="c1"># wheel_diameter и axle_track указываются в мм.</span>
+<span class="n">drive_base</span> <span class="o">=</span> <span class="n">DriveBase</span><span class="p">(</span><span class="n">left_motor</span><span class="p">,</span> <span class="n">right_motor</span><span class="p">,</span> <span class="n">wheel_diameter</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">axle_track</span><span class="o">=</span><span class="mi">112</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_2">Единицы измерения и знаки</h2>
+<ul>
+<li>Расстояние: миллиметры (<code>mm</code>).</li>
+<li>Угол поворота: градусы (<code>deg</code>).</li>
+<li>Линейная скорость: <code>mm/s</code>.</li>
+<li>Угловая скорость: <code>deg/s</code>.</li>
+<li>Положительная скорость/дистанция: движение вперед.</li>
+<li>Положительный угол/turn_rate: поворот вправо (по часовой стрелке, если смотреть сверху).</li>
+</ul>
+<h2 id="_3">Основные методы движения</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Метод</th>
+<th style="text-align: left;">Пример</th>
+<th style="text-align: left;">Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>straight(distance)</code></td>
+<td style="text-align: left;"><code>drive_base.straight(300)</code></td>
+<td style="text-align: left;">Едет прямо на заданную дистанцию.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>turn(angle)</code></td>
+<td style="text-align: left;"><code>drive_base.turn(90)</code></td>
+<td style="text-align: left;">Поворот на месте на заданный угол.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>arc(radius, angle=...)</code></td>
+<td style="text-align: left;"><code>drive_base.arc(120, angle=180)</code></td>
+<td style="text-align: left;">Едет по дуге окружности.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>arc(radius, distance=...)</code></td>
+<td style="text-align: left;"><code>drive_base.arc(250, distance=400)</code></td>
+<td style="text-align: left;">Едет по дуге на заданную длину.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>curve(radius, angle)</code></td>
+<td style="text-align: left;"><code>drive_base.curve(120, 90)</code></td>
+<td style="text-align: left;">Устаревший метод дуги (для старого кода до 3.6).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>drive(speed, turn_rate)</code></td>
+<td style="text-align: left;"><code>drive_base.drive(200, 30)</code></td>
+<td style="text-align: left;">Непрерывное движение до <code>stop()</code>/<code>brake()</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>stop()</code></td>
+<td style="text-align: left;"><code>drive_base.stop()</code></td>
+<td style="text-align: left;">Остановка накатом (coast).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>brake()</code></td>
+<td style="text-align: left;"><code>drive_base.brake()</code></td>
+<td style="text-align: left;">Пассивное торможение.</td>
+</tr>
+</tbody>
+</table>
+<p>Пример:</p>
+<div class="highlight"><pre><span></span><code><span class="n">drive_base</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="thenstop">Режим остановки после маневра (<code>then=Stop...</code>)</h2>
+<p>Методы <code>straight</code>, <code>turn</code>, <code>arc</code> принимают <code>then=Stop...</code>:</p>
+<ul>
+<li><code>Stop.HOLD</code> (по умолчанию): удерживает позицию.</li>
+<li><code>Stop.BRAKE</code>: тормозит и не удерживает активно.</li>
+<li><code>Stop.COAST</code>: свободный накат.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stop</span>
+
+<span class="n">drive_base</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="n">then</span><span class="o">=</span><span class="n">Stop</span><span class="o">.</span><span class="n">HOLD</span><span class="p">)</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">then</span><span class="o">=</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">then</span><span class="o">=</span><span class="n">Stop</span><span class="o">.</span><span class="n">COAST</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_4">Блокирующий и неблокирующий режим</h2>
+<p>По умолчанию команды ждут завершения (<code>wait=True</code>).<br />
+Если нужно выполнять код параллельно с движением, используйте <code>wait=False</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wait</span>
+
+<span class="n">drive_base</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">drive_base</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
+    <span class="n">wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="settings">Настройка динамики: <code>settings()</code></h2>
+<p><code>settings()</code> задает параметры только для маневров (<code>straight/turn/arc</code>), но не для <code>drive()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">drive_base</span><span class="o">.</span><span class="n">settings</span><span class="p">(</span>
+    <span class="n">straight_speed</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>         <span class="c1"># mm/s</span>
+    <span class="n">straight_acceleration</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span>  <span class="c1"># mm/s²</span>
+    <span class="n">turn_rate</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>              <span class="c1"># deg/s</span>
+    <span class="n">turn_acceleration</span><span class="o">=</span><span class="mi">360</span>       <span class="c1"># deg/s²</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">drive_base</span><span class="o">.</span><span class="n">settings</span><span class="p">())</span>  <span class="c1"># кортеж текущих значений</span>
+</code></pre></div>
+<h3 id="settings_1">Ограничения <code>settings()</code></h3>
+<p>Если задать значения выше физического предела, Pybricks выдаст ошибку.</p>
+<div class="highlight"><pre><span></span><code>max_straight_mm_s  = 2000  * π * D / 360
+max_straight_mm_s2 = 20000 * π * D / 360
+max_turn_deg_s     = 2000  * D / T
+max_turn_deg_s2    = 20000 * D / T
+</code></pre></div>
+<p>Где:
+* <code>D</code> - диаметр колеса (мм).
+* <code>T</code> - <code>axle_track</code>, расстояние между колесами (мм).</p>
+<h3 id="88-44-624">Расчет для колес 88, 44, 62.4 мм</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">D (мм)</th>
+<th style="text-align: left;">max_straight_mm_s</th>
+<th style="text-align: left;">max_straight_mm_s2</th>
+<th style="text-align: left;">max_turn_deg_s</th>
+<th style="text-align: left;">max_turn_deg_s2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">88</td>
+<td style="text-align: left;">1535.89</td>
+<td style="text-align: left;">15358.90</td>
+<td style="text-align: left;">176000 / T</td>
+<td style="text-align: left;">1760000 / T</td>
+</tr>
+<tr>
+<td style="text-align: left;">44</td>
+<td style="text-align: left;">767.94</td>
+<td style="text-align: left;">7679.45</td>
+<td style="text-align: left;">88000 / T</td>
+<td style="text-align: left;">880000 / T</td>
+</tr>
+<tr>
+<td style="text-align: left;">62.4</td>
+<td style="text-align: left;">1089.09</td>
+<td style="text-align: left;">10890.85</td>
+<td style="text-align: left;">124800 / T</td>
+<td style="text-align: left;">1248000 / T</td>
+</tr>
+</tbody>
+</table>
+<p>Пример для <code>T = 112 мм</code>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">D (мм)</th>
+<th style="text-align: left;">max_turn_deg_s</th>
+<th style="text-align: left;">max_turn_deg_s2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">88</td>
+<td style="text-align: left;">1571.43</td>
+<td style="text-align: left;">15714.29</td>
+</tr>
+<tr>
+<td style="text-align: left;">44</td>
+<td style="text-align: left;">785.71</td>
+<td style="text-align: left;">7857.14</td>
+</tr>
+<tr>
+<td style="text-align: left;">62.4</td>
+<td style="text-align: left;">1114.29</td>
+<td style="text-align: left;">11142.86</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">Телеметрия и состояние</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Метод</th>
+<th style="text-align: left;">Что возвращает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>distance()</code></td>
+<td style="text-align: left;">Пройденную дистанцию с последнего <code>reset()</code> (мм).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>angle()</code></td>
+<td style="text-align: left;">Накопленный угол с последнего <code>reset()</code> (градусы).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>state()</code></td>
+<td style="text-align: left;"><code>(distance, drive_speed, angle, turn_rate)</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>done()</code></td>
+<td style="text-align: left;"><code>True</code>, если текущая команда завершена.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>stalled()</code></td>
+<td style="text-align: left;"><code>True</code>, если база уперлась/не может выполнить команду.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">drive_base</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="s2">&quot;v:&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;a:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;w:&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="reset">Сброс одометрии: <code>reset()</code></h2>
+<div class="highlight"><pre><span></span><code><span class="n">drive_base</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>             <span class="c1"># distance=0, angle=0</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">)</span>     <span class="c1"># задать свои стартовые значения</span>
+</code></pre></div>
+<p><code>reset()</code> также останавливает текущее движение.</p>
+<h2 id="use_gyro">Использование гироскопа: <code>use_gyro()</code></h2>
+<div class="highlight"><pre><span></span><code><span class="n">drive_base</span><span class="o">.</span><span class="n">use_gyro</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># включить гироскоп для прямолинейности и поворотов</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">turn</span><span class="p">(</span><span class="mi">360</span><span class="p">)</span>
+
+<span class="n">drive_base</span><span class="o">.</span><span class="n">use_gyro</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># только энкодеры моторов</span>
+</code></pre></div>
+<p>Если хаб установлен нестандартно, задайте <code>top_side</code> и <code>front_side</code> при создании <code>PrimeHub()</code>, иначе углы поворота могут считаться неверно.</p>
+<h2 id="_6">Практическая калибровка размеров</h2>
+<p>Точность <code>DriveBase</code> сильно зависит от <code>wheel_diameter</code> и <code>axle_track</code>.</p>
+<ol>
+<li>Измерьте начальные значения линейкой.</li>
+<li>Проверьте прямую: <code>drive_base.straight(1000)</code> и измерьте реальную дистанцию.</li>
+<li>Если робот недоезжает, немного уменьшите <code>wheel_diameter</code>.</li>
+<li>Если переезжает, немного увеличьте <code>wheel_diameter</code>.</li>
+<li>Проверьте поворот: <code>drive_base.turn(360)</code>.</li>
+<li>Если недоворачивает, увеличьте <code>axle_track</code>.</li>
+<li>Если переворачивает, уменьшите <code>axle_track</code>.</li>
+</ol>
+<p>Сначала калибруйте <code>wheel_diameter</code>, потом <code>axle_track</code>.</p>
+<h2 id="curve-arc"><code>curve()</code> и <code>arc()</code>: в чем разница</h2>
+<p>В Pybricks 3.6+ для нового кода рекомендуется <code>arc()</code>.<br />
+<code>curve()</code> сохранен для совместимости со старыми проектами.</p>
+<h3 id="_7">Сигнатуры</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Старый стиль</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">curve</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+<span class="c1"># Новый стиль (нужно указать либо angle, либо distance)</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="_8">Логика знаков</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Метод</th>
+<th style="text-align: left;">Что задает <code>radius</code></th>
+<th style="text-align: left;">Что задает <code>angle</code> / <code>distance</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>curve()</code> (legacy)</td>
+<td style="text-align: left;">Направление движения: <code>+</code> вперед, <code>-</code> назад</td>
+<td style="text-align: left;">Направление поворота: <code>+</code> вправо, <code>-</code> влево</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>arc()</code> (актуальный)</td>
+<td style="text-align: left;">Сторону дуги: <code>+</code> центр окружности справа, <code>-</code> слева</td>
+<td style="text-align: left;">Направление движения: <code>+</code> вперед, <code>-</code> назад</td>
+</tr>
+</tbody>
+</table>
+<p>Именно из-за этой разницы старые вызовы с отрицательными значениями при переходе на <code>arc()</code> нужно перепроверять на роботе.</p>
+<h3 id="-">Мини-примеры миграции</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Было (curve): вперед и вправо</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">curve</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+
+<span class="c1"># Стало (arc): вперед и вправо</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Было (curve): вперед и влево</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">curve</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="c1"># Стало (arc): вперед и влево</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="drive_basearcradius-angle">Наглядно: <code>drive_base.arc(radius, angle=...)</code></h3>
+<p>Для <code>arc()</code> знак <code>radius</code> выбирает сторону, где находится центр окружности, а знак <code>angle</code>/<code>distance</code> - направление движения по дуге.</p>
+<div class="arc-demo" data-arc-demo style="max-width: 560px;">
+  <div class="arc-demo__controls">
+    <fieldset class="arc-demo__fieldset">
+      <legend>Сторона центра (<code>radius</code>)</legend>
+      <label><input type="radio" name="arc-demo-radius" value="right" checked> <code>radius &gt; 0</code> (центр справа)</label>
+      <label><input type="radio" name="arc-demo-radius" value="left"> <code>radius &lt; 0</code> (центр слева)</label>
+    </fieldset>
+
+    <fieldset class="arc-demo__fieldset">
+      <legend>Направление движения (<code>angle</code>/<code>distance</code>)</legend>
+      <label><input type="radio" name="arc-demo-motion" value="forward" checked> <span class="arc-demo__swatch arc-demo__swatch--fwd"></span> <code>&gt; 0</code> (вперед)</label>
+      <label><input type="radio" name="arc-demo-motion" value="backward"> <span class="arc-demo__swatch arc-demo__swatch--back"></span> <code>&lt; 0</code> (назад)</label>
+    </fieldset>
+  </div>
+
+  <div class="arc-demo__viewport" style="max-width: 520px; margin: 0 auto; border: 1px solid #d7dee7; border-radius: 8px; overflow: hidden;">
+    <svg
+      class="arc-demo__svg"
+      style="display: block; width: 100%; height: auto;"
+      viewBox="0 0 360 240"
+      width="520"
+      height="346"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Интерактивная схема arc для DriveBase"
+    >
+      <defs>
+        <marker id="arc-demo-arrow-fwd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#198754"/>
+        </marker>
+        <marker id="arc-demo-arrow-back" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#b26a00"/>
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="360" height="240" rx="12" fill="#fbfdff"/>
+
+      <circle data-arc-demo-circle cx="270" cy="130" r="90" fill="none" stroke="#d7dee7" stroke-width="1.5"/>
+      <line data-arc-demo-radius-line x1="180" y1="130" x2="270" y2="130" stroke="#8d99a6" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <circle data-arc-demo-center-dot cx="270" cy="130" r="5" fill="#e55353"/>
+      <text data-arc-demo-center-label x="286" y="126" font-size="12" fill="#334155">центр</text>
+
+      <path data-arc-demo-path d="M180 130 A90 90 0 0 1 270 40" fill="none" stroke="#198754" stroke-width="6" marker-end="url(#arc-demo-arrow-fwd)"/>
+
+      <g transform="translate(180 130)">
+        <rect x="-16" y="-22" width="32" height="44" rx="7" fill="#1f2937"/>
+        <circle cx="0" cy="0" r="3.2" fill="#ffffff"/>
+        <line x1="0" y1="-22" x2="0" y2="-48" stroke="#2563eb" stroke-width="4"/>
+        <path d="M-7 -40 L0 -50 L7 -40" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="arc-demo__meta">
+    <div class="arc-demo__legend">
+      <span class="arc-demo__chip"><span class="arc-demo__swatch arc-demo__swatch--fwd"></span> сплошная: <code>&gt; 0</code> (вперед)</span>
+      <span class="arc-demo__chip"><span class="arc-demo__swatch arc-demo__swatch--back"></span> пунктир: <code>&lt; 0</code> (назад)</span>
+    </div>
+    <div class="arc-demo__current">
+      <code data-arc-demo-call>drive_base.arc(120, angle=90)</code>
+      <span data-arc-demo-text>центр справа, едет вперед по дуге</span>
+    </div>
+  </div>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../structure/" class="btn btn-neutral float-left" title="Структура"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../motors/" class="btn btn-neutral float-right" title="Управление моторами">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../structure/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../motors/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/arc_demo.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

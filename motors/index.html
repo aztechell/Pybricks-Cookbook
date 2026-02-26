@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Управление моторами - Pybricks Cookbook</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/tabs.css" rel="stylesheet" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../css/arc_demo.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043c\u043e\u0442\u043e\u0440\u0430\u043c\u0438";
+        var mkdocs_page_input_path = "motors.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Введение</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Словарь</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Установка</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../primehub/">Spike PRIME hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Базовый код</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../create_code/">Создание кода</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../init/">Инициализация</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../func/">Функции</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../structure/">Структура</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../db/">Drive Base</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Управление моторами</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#spike-prime-powered-up">Моторы SPIKE Prime и Powered UP</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Методы управления</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">Инициализация</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">Основные команды движения</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">Получение данных</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stop">Режимы остановки (Stop)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Продвинутый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tips/">Советы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../await_in_pybricks/">Async</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Конструкции</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../studio/">Studio 2.0</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Pybricks Cookbook</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Базовый код</li>
+      <li class="breadcrumb-item active">Управление моторами</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">Управление моторами</h1>
+<h2 id="spike-prime-powered-up">Моторы SPIKE Prime и Powered UP</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Мотор</th>
+<th style="text-align: left;">Система</th>
+<th style="text-align: left;">Скорость (RPM)</th>
+<th style="text-align: left;">Крутящий момент (N·cm)</th>
+<th style="text-align: left;">Источник / условия</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="https://education.lego.com/en-us/products/lego-technic-large-angular-motor/45602/">Technic Large Angular Motor (45602)</a><br><img src="../img/large_angular_motor_45602.jpg" width="64" alt="45602"></td>
+<td style="text-align: left;">SPIKE Prime</td>
+<td style="text-align: left;"><code>175</code> (без нагрузки)<br><code>135</code> (макс. эффективность)<br><code>≈126</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><code>8</code> (макс. эффективность)<br><code>25</code> (стопор)<br><code>≈8.47</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><a href="https://le-www-live-s.legocdn.com/sc/media/files/support/spike-prime/techspecs_techniclargeangularmotor-1b79e2f4fbb292aaf40c97fec0c31fff.pdf">LEGO Education Tech Specs (PDF)</a><br><code>7.2V</code>, <code>±15%</code><br><a href="https://philohome.com/motors/motorcomp.htm">Philo motor comparison</a><br><code>Spike L</code>, <code>Loaded characteristics</code>, строка <code>7.5V</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://education.lego.com/en-us/products/lego-technic-medium-angular-motor/45603/">Technic Medium Angular Motor (45603)</a><br><img src="../img/medium_angular_motor_45603.jpg" width="64" alt="45603"></td>
+<td style="text-align: left;">SPIKE Prime</td>
+<td style="text-align: left;"><code>185</code> (без нагрузки)<br><code>135</code> (макс. эффективность)<br><code>≈105</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><code>3.5</code> (макс. эффективность)<br><code>18</code> (стопор)<br><code>≈4.48</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><a href="https://le-www-live-s.legocdn.com/sc/media/files/support/spike-prime/techspecs_technicmediumangularmotor-19684ffc443792280359ef217512a1d1.pdf">LEGO Education Tech Specs (PDF)</a><br><code>7.2V</code>, <code>±15%</code><br><a href="https://philohome.com/motors/motorcomp.htm">Philo motor comparison</a><br><code>Spike M</code>, <code>Loaded characteristics</code>, строка <code>7.5V</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://www.lego.com/en-us/product/technic-large-motor-88013">Technic Large Motor (88013)</a><br><img src="../img/large_motor_88013.jpg" width="64" alt="88013"></td>
+<td style="text-align: left;">Powered UP</td>
+<td style="text-align: left;"><code>≈141</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><code>≈8.81</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><a href="https://philohome.com/motors/motorcomp.htm">Philo motor comparison</a><br><code>Control+ L</code>, <code>Loaded characteristics</code>, строка <code>7.5V</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://www.lego.com/en-us/product/technic-xl-motor-88014">Technic XL Motor (88014)</a><br><img src="../img/xl_motor_88014.jpg" width="64" alt="88014"></td>
+<td style="text-align: left;">Powered UP</td>
+<td style="text-align: left;"><code>≈147</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><code>≈8.81</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><a href="https://philohome.com/motors/motorcomp.htm">Philo motor comparison</a><br><code>Control+ XL</code>, <code>Loaded characteristics</code>, строка <code>7.5V</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://www.lego.com/en-us/product/medium-angular-motor-88018">Medium Angular Motor (88018)</a><br><img src="../img/medium_angular_motor_88018.jpg" width="64" alt="88018"></td>
+<td style="text-align: left;">Powered UP</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;">—</td>
+<td style="text-align: left;"><a href="https://www.lego.com/en-us/product/medium-angular-motor-88018">LEGO Shop 88018</a><br>на странице нет публичных RPM / torque</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://www.lego.com/en-us/product/medium-linear-motor-88008">Medium Linear Motor (88008)</a><br><img src="../img/medium_linear_motor_88008.jpg" width="64" alt="88008"></td>
+<td style="text-align: left;">Powered UP</td>
+<td style="text-align: left;"><code>≈201</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><code>≈4.08</code> (Philo, <code>7.5V</code>)</td>
+<td style="text-align: left;"><a href="https://philohome.com/motors/motorcomp.htm">Philo motor comparison</a><br><code>PUP medium</code>, <code>Loaded characteristics</code>, строка <code>7.5V</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Для честного сравнения моторов нужно совпадение <strong>напряжения</strong> и <strong>режима измерения</strong>. Здесь для Powered UP выбраны данные Philo при <code>7.5V</code> (ближайшие к <code>7.4V</code> SPIKE Prime), а для SPIKE приведены официальные значения LEGO Education при <code>7.2V</code>.</p>
+</blockquote>
+<h2 id="_2">Методы управления</h2>
+<p>Класс <code>Motor</code> предоставляет множество методов для точного управления.</p>
+<h3 id="_3">Инициализация</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.pupdevices</span><span class="w"> </span><span class="kn">import</span> <span class="n">Motor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Port</span><span class="p">,</span> <span class="n">Direction</span>
+
+<span class="c1"># Простая инициализация</span>
+<span class="n">motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># С инверсией направления и настройкой шестеренок</span>
+<span class="c1"># gears=[12, 36] означает, что мотор (12 зубьев) крутит колесо (36 зубьев)</span>
+<span class="n">motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">COUNTERCLOCKWISE</span><span class="p">,</span> <span class="n">gears</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">36</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="_4">Основные команды движения</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Метод</th>
+<th style="text-align: left;">Пример</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>run(speed)</strong></td>
+<td style="text-align: left;"><code>motor.run(500)</code></td>
+<td style="text-align: left;">Вращает мотор с заданной скоростью (град/сек) бесконечно.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>run_time(speed, time)</strong></td>
+<td style="text-align: left;"><code>motor.run_time(500, 2000)</code></td>
+<td style="text-align: left;">Вращает мотор заданное время (мс).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>run_angle(speed, angle)</strong></td>
+<td style="text-align: left;"><code>motor.run_angle(500, 90)</code></td>
+<td style="text-align: left;">Поворачивает мотор на заданный угол (относительно текущего положения).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>run_target(speed, target_angle)</strong></td>
+<td style="text-align: left;"><code>motor.run_target(500, 180)</code></td>
+<td style="text-align: left;">Поворачивает мотор к абсолютной позиции (например, к отметке 180°).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>stop()</strong></td>
+<td style="text-align: left;"><code>motor.stop()</code></td>
+<td style="text-align: left;">Останавливает мотор (используя режим остановки по умолчанию).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>dc(duty)</strong></td>
+<td style="text-align: left;"><code>motor.dc(50)</code></td>
+<td style="text-align: left;">Подает напряжение в % (от -100 до 100). Без контроля скорости (PID выключен).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">Получение данных</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Метод</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>motor.speed()</code></td>
+<td style="text-align: left;">Текущая скорость (град/сек).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>motor.angle()</code></td>
+<td style="text-align: left;">Текущий угол поворота (градусы).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>motor.load()</code></td>
+<td style="text-align: left;">Текущая нагрузка на мотор (в мА, приблизительно).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>motor.stalled()</code></td>
+<td style="text-align: left;">Возвращает <code>True</code>, если мотор застрял (не может двигаться).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stop">Режимы остановки (Stop)</h3>
+<p>В методах <code>run_time</code>, <code>run_angle</code>, <code>run_target</code> можно передать аргумент <code>then=Stop...</code>, чтобы указать поведение после завершения движения.</p>
+<ul>
+<li><strong>Stop.COAST</strong>: Отключить питание, мотор вращается по инерции.</li>
+<li><strong>Stop.COAST_SMART</strong>: Аналогично <code>COAST</code>, но также сбрасывает накопленную ошибку PID-регулятора. Полезно для сброса интегральной ошибки перед новым движением.</li>
+<li><strong>Stop.BRAKE</strong>: Замкнуть обмотки, пассивное торможение.</li>
+<li><strong>Stop.HOLD</strong>: Активное удержание позиции (мотор сопротивляется повороту).</li>
+<li><strong>Stop.NONE</strong>: Не останавливать мотор. Используется для плавного перехода к следующей команде (например, чтобы слить два движения в одно).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stop</span>
+
+<span class="c1"># Проехать 90 градусов и жестко зафиксироваться</span>
+<span class="n">motor</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">then</span><span class="o">=</span><span class="n">Stop</span><span class="o">.</span><span class="n">HOLD</span><span class="p">)</span>
+
+<span class="c1"># Разогнаться и отключить питание (катиться по инерции)</span>
+<span class="n">motor</span><span class="o">.</span><span class="n">run_time</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">then</span><span class="o">=</span><span class="n">Stop</span><span class="o">.</span><span class="n">COAST</span><span class="p">)</span>
+
+<span class="c1"># Проехать часть пути и сразу начать следующее движение без остановки</span>
+<span class="n">motor</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="n">then</span><span class="o">=</span><span class="n">Stop</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+<span class="n">motor</span><span class="o">.</span><span class="n">run_angle</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">then</span><span class="o">=</span><span class="n">Stop</span><span class="o">.</span><span class="n">BRAKE</span><span class="p">)</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../db/" class="btn btn-neutral float-left" title="Drive Base"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../tips/" class="btn btn-neutral float-right" title="Советы">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../db/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../tips/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/arc_demo.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

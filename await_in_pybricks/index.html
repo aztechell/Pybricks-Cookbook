@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Async - Pybricks Cookbook</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/tabs.css" rel="stylesheet" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../css/arc_demo.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Async";
+        var mkdocs_page_input_path = "await_in_pybricks.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Введение</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Словарь</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Установка</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../primehub/">Spike PRIME hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Базовый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../create_code/">Создание кода</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../init/">Инициализация</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../func/">Функции</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../structure/">Структура</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../db/">Drive Base</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motors/">Управление моторами</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Продвинутый код</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../tips/">Советы</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Async</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#await">Зачем вообще нужен await</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#async">Обычное выполнение (без async)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#async_1">Async‑функции</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#await_1">Что делает await</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#event-loop-pybricks">Event loop в Pybricks</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Пример чередования задач</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#wait-await-wait">wait() и await wait()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#run_task">run_task()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#multitask">multitask()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#async_2">Что async НЕ делает</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#async_3">Когда async оправдан</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Главный принцип</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Итог</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Конструкции</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../studio/">Studio 2.0</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Pybricks Cookbook</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Продвинутый код</li>
+      <li class="breadcrumb-item active">Async</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="async-await-pybricks">Async / await в Pybricks</h1>
+<h2 id="await">Зачем вообще нужен <code>await</code></h2>
+<p>Pybricks — однопоточная среда. Код выполняется <strong>строго последовательно</strong>, если не используется <code>async/await</code>.</p>
+<p><code>await</code> — это механизм <strong>кооперативной многозадачности</strong>:
+- нет потоков
+- нет параллельного выполнения
+- есть добровольная передача управления</p>
+<p>Код сам сообщает системе:  </p>
+<blockquote>
+<p>«Я сейчас жду — можешь выполнить что‑то другое».</p>
+</blockquote>
+<hr />
+<h2 id="async">Обычное выполнение (без async)</h2>
+<p>Последовательный код:</p>
+<div class="highlight"><pre><span></span><code>функция A:
+  шаг 1
+  шаг 2
+  шаг 3
+
+функция B:
+  шаг 1
+  шаг 2
+  шаг 3
+</code></pre></div>
+<p>Пока <code>A</code> не закончится, <code>B</code> <strong>не начнётся</strong>.<br />
+Любой <code>wait()</code> блокирует всё.</p>
+<hr />
+<h2 id="async_1">Async‑функции</h2>
+<p>Async‑функция объявляется так:</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">():</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>Такая функция <strong>не выполняется напрямую</strong>.<br />
+Она должна быть:
+- либо <code>await</code>‑нута
+- либо запущена через <code>run_task()</code> или <code>multitask()</code></p>
+<hr />
+<h2 id="await_1">Что делает <code>await</code></h2>
+<p><code>await</code>:
+- <strong>останавливает текущую задачу</strong>
+- <strong>возвращает управление event loop</strong>
+- разрешает выполниться другим задачам</p>
+<p>Важно:
+- <code>await</code> не ускоряет код
+- <code>await</code> не создаёт поток
+- <code>await</code> — точка переключения</p>
+<hr />
+<h2 id="event-loop-pybricks">Event loop в Pybricks</h2>
+<p>В Pybricks есть один event loop:</p>
+<ul>
+<li>он хранит список активных задач</li>
+<li>он выполняет задачи до первого <code>await</code></li>
+<li>он переключается только в <code>await</code></li>
+</ul>
+<p>Если задача <strong>не делает await</strong>, она блокирует всё.</p>
+<hr />
+<h2 id="_1">Пример чередования задач</h2>
+<div class="highlight"><pre><span></span><code>Task A:
+  шаг 1
+  await wait(10)
+  шаг 2
+
+Task B:
+  шаг 1
+  await wait(0)
+  шаг 2
+</code></pre></div>
+<p>Выполнение:</p>
+<ol>
+<li>A выполняется до <code>await</code></li>
+<li>A останавливается</li>
+<li>B выполняется</li>
+<li>B останавливается</li>
+<li>Event loop возвращается к A</li>
+</ol>
+<p>Это <strong>чередование</strong>, а не параллельность.</p>
+<hr />
+<h2 id="wait-await-wait"><code>wait()</code> и <code>await wait()</code></h2>
+<p><code>wait(ms)</code> без <code>await</code>:
+- блокирует всё</p>
+<p><code>await wait(ms)</code>:
+- приостанавливает только текущую задачу
+- даёт другим задачам выполняться</p>
+<p><code>await wait(0)</code>:
+- немедленно отдаёт управление
+- используется для частого переключения</p>
+<hr />
+<h2 id="run_task">run_task()</h2>
+<div class="highlight"><pre><span></span><code><span class="n">run_task</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+<ul>
+<li>запускает <strong>одну</strong> async‑функцию</li>
+<li>блокирует основной поток</li>
+<li><strong>нельзя вызывать вложенно</strong></li>
+</ul>
+<p><code>run_task()</code> всегда используется <strong>один раз</strong>.</p>
+<hr />
+<h2 id="multitask">multitask()</h2>
+<div class="highlight"><pre><span></span><code><span class="k">await</span> <span class="n">multitask</span><span class="p">(</span><span class="n">task1</span><span class="p">(),</span> <span class="n">task2</span><span class="p">())</span>
+</code></pre></div>
+<p>Позволяет:
+- запускать несколько async‑задач
+- выполнять их кооперативно</p>
+<p>Параметры:
+- <code>race=True</code> — завершить всё, когда первая задача закончится</p>
+<hr />
+<h2 id="async_2">Что async НЕ делает</h2>
+<p>Async в Pybricks:</p>
+<p>❌ не делает код быстрее<br />
+❌ не даёт параллелизм<br />
+❌ не гарантирует real‑time<br />
+❌ не заменяет таймеры и IRQ  </p>
+<hr />
+<h2 id="async_3">Когда async оправдан</h2>
+<p>Async полезен, когда есть:
+- несколько независимых циклов
+- сенсоры + управление + логика
+- состояния, а не линейный сценарий</p>
+<p>Async — это <strong>архитектурный инструмент</strong>, а не оптимизация.</p>
+<hr />
+<h2 id="_2">Главный принцип</h2>
+<blockquote>
+<p>Если код не делает <code>await</code>, он блокирует всё.</p>
+</blockquote>
+<p>Хорошая async‑задача:
+- короткая
+- часто делает <code>await</code>
+- не содержит долгих вычислений</p>
+<hr />
+<h2 id="_3">Итог</h2>
+<p><code>await</code> в Pybricks — это:
+- добровольная пауза
+- кооперативная многозадачность
+- способ держать систему управляемой</p>
+<p>Это не магия.<br />
+Это дисциплина.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../tips/" class="btn btn-neutral float-left" title="Советы"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../studio/" class="btn btn-neutral float-right" title="Studio 2.0">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../tips/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../studio/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/arc_demo.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
