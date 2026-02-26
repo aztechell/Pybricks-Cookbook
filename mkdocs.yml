@@ -14,6 +14,7 @@ markdown_extensions:
 extra_css:
   - css/tabs.css
   - css/extra.css
+  - css/arc_demo.css
 extra_javascript:
   - js/arc_demo.js
 nav:

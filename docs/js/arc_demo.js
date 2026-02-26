@@ -19,25 +19,25 @@ function initArcDemos() {
 
     const geometry = {
       right: {
-        centerX: 250,
+        centerX: 270,
         centerY: 130,
-        labelX: 264,
+        labelX: 286,
         labelY: 126,
         paths: {
-          forward: "M160 130 A90 90 0 0 1 250 40",
-          backward: "M160 130 A90 90 0 0 0 250 220",
+          forward: "M180 130 A90 90 0 0 1 270 40",
+          backward: "M180 130 A90 90 0 0 0 270 220",
         },
         label: "центр справа",
         radiusValue: 120,
       },
       left: {
-        centerX: 70,
+        centerX: 90,
         centerY: 130,
-        labelX: 10,
+        labelX: 106,
         labelY: 126,
         paths: {
-          forward: "M160 130 A90 90 0 0 0 70 40",
-          backward: "M160 130 A90 90 0 0 1 70 220",
+          forward: "M180 130 A90 90 0 0 0 90 40",
+          backward: "M180 130 A90 90 0 0 1 90 220",
         },
         label: "центр слева",
         radiusValue: -120,
@@ -78,7 +78,7 @@ function initArcDemos() {
       circle.setAttribute("cx", String(sideData.centerX));
       circle.setAttribute("cy", String(sideData.centerY));
 
-      radiusLine.setAttribute("x1", "160");
+      radiusLine.setAttribute("x1", "180");
       radiusLine.setAttribute("y1", "130");
       radiusLine.setAttribute("x2", String(sideData.centerX));
       radiusLine.setAttribute("y2", String(sideData.centerY));

@@ -233,7 +233,7 @@ drive_base.arc(-120, angle=90)
     </fieldset>
   </div>
 
-  <div class="arc-demo__viewport" style="max-width: 520px; border: 1px solid #d7dee7; border-radius: 8px; overflow: hidden;">
+  <div class="arc-demo__viewport" style="max-width: 520px; margin: 0 auto; border: 1px solid #d7dee7; border-radius: 8px; overflow: hidden;">
     <svg
       class="arc-demo__svg"
       style="display: block; width: 100%; height: auto;"
@@ -255,14 +255,14 @@ drive_base.arc(-120, angle=90)
 
       <rect x="0" y="0" width="360" height="240" rx="12" fill="#fbfdff"/>
 
-      <circle data-arc-demo-circle cx="250" cy="130" r="90" fill="none" stroke="#d7dee7" stroke-width="1.5"/>
-      <line data-arc-demo-radius-line x1="160" y1="130" x2="250" y2="130" stroke="#8d99a6" stroke-width="1.5" stroke-dasharray="5 5"/>
-      <circle data-arc-demo-center-dot cx="250" cy="130" r="5" fill="#e55353"/>
-      <text data-arc-demo-center-label x="265" y="126" font-size="12" fill="#334155">центр</text>
+      <circle data-arc-demo-circle cx="270" cy="130" r="90" fill="none" stroke="#d7dee7" stroke-width="1.5"/>
+      <line data-arc-demo-radius-line x1="180" y1="130" x2="270" y2="130" stroke="#8d99a6" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <circle data-arc-demo-center-dot cx="270" cy="130" r="5" fill="#e55353"/>
+      <text data-arc-demo-center-label x="286" y="126" font-size="12" fill="#334155">центр</text>
 
-      <path data-arc-demo-path d="M160 130 A90 90 0 0 1 250 40" fill="none" stroke="#198754" stroke-width="6" marker-end="url(#arc-demo-arrow-fwd)"/>
+      <path data-arc-demo-path d="M180 130 A90 90 0 0 1 270 40" fill="none" stroke="#198754" stroke-width="6" marker-end="url(#arc-demo-arrow-fwd)"/>
 
-      <g transform="translate(160 130)">
+      <g transform="translate(180 130)">
         <rect x="-16" y="-22" width="32" height="44" rx="7" fill="#1f2937"/>
         <circle cx="0" cy="0" r="3.2" fill="#ffffff"/>
         <line x1="0" y1="-22" x2="0" y2="-48" stroke="#2563eb" stroke-width="4"/>
