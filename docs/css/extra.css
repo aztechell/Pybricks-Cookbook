@@ -1,3 +1,47 @@
 .wy-nav-content {
   max-width: 100%;
 }
+
+.arc-signs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 0.8rem 0 0.5rem;
+}
+
+.arc-sign-card {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #d7dee7;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.arc-sign-card figcaption {
+  margin-bottom: 8px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.arc-sign-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.arc-sign-note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0.25rem 0 1rem;
+}
+
+.arc-sign-note span {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #d7dee7;
+  background: #f6f9fc;
+  line-height: 1.3;
+}

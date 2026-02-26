@@ -196,6 +196,86 @@ drive_base.arc(radius, distance=300)
 
 Именно из-за этой разницы старые вызовы с отрицательными значениями при переходе на `arc()` нужно перепроверять на роботе.
 
+### Наглядно: `drive_base.arc(radius, angle=...)`
+
+Робот на схемах стартует в центре и смотрит вверх (стрелка).  
+Для `arc()` знак `radius` выбирает сторону, где находится центр окружности, а знак `angle`/`distance` - направление движения по дуге.
+
+<div class="arc-signs-grid">
+  <figure class="arc-sign-card">
+    <figcaption><code>radius &gt; 0</code> → центр дуги справа</figcaption>
+    <svg class="arc-sign-svg" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Положительный radius: центр дуги справа, сплошная дуга вперед, пунктир назад">
+      <defs>
+        <marker id="arc-fwd-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#198754"/>
+        </marker>
+        <marker id="arc-back-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#b26a00"/>
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="320" height="220" rx="12" fill="#fbfdff"/>
+
+      <circle cx="200" cy="120" r="70" fill="none" stroke="#d7dee7" stroke-width="1.5"/>
+      <line x1="130" y1="120" x2="200" y2="120" stroke="#8d99a6" stroke-dasharray="4 4"/>
+      <circle cx="200" cy="120" r="4" fill="#e55353"/>
+      <text x="208" y="114" font-size="12" fill="#334155">центр</text>
+
+      <path d="M130 120 A70 70 0 0 1 200 50" fill="none" stroke="#198754" stroke-width="5" marker-end="url(#arc-fwd-r)"/>
+      <path d="M130 120 A70 70 0 0 0 200 190" fill="none" stroke="#b26a00" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#arc-back-r)"/>
+
+      <g>
+        <rect x="118" y="104" width="24" height="32" rx="5" fill="#1f2937"/>
+        <circle cx="130" cy="120" r="2.2" fill="#ffffff"/>
+        <line x1="130" y1="104" x2="130" y2="82" stroke="#2563eb" stroke-width="3"/>
+        <path d="M124 88 L130 80 L136 88" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+
+      <text x="18" y="26" font-size="12" fill="#198754">сплошная: angle/distance &gt; 0 (вперед)</text>
+      <text x="18" y="44" font-size="12" fill="#b26a00">пунктир: angle/distance &lt; 0 (назад)</text>
+    </svg>
+  </figure>
+
+  <figure class="arc-sign-card">
+    <figcaption><code>radius &lt; 0</code> → центр дуги слева</figcaption>
+    <svg class="arc-sign-svg" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Отрицательный radius: центр дуги слева, сплошная дуга вперед, пунктир назад">
+      <defs>
+        <marker id="arc-fwd-l" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#198754"/>
+        </marker>
+        <marker id="arc-back-l" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#b26a00"/>
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="320" height="220" rx="12" fill="#fbfdff"/>
+
+      <circle cx="120" cy="120" r="70" fill="none" stroke="#d7dee7" stroke-width="1.5"/>
+      <line x1="190" y1="120" x2="120" y2="120" stroke="#8d99a6" stroke-dasharray="4 4"/>
+      <circle cx="120" cy="120" r="4" fill="#e55353"/>
+      <text x="66" y="114" font-size="12" fill="#334155">центр</text>
+
+      <path d="M190 120 A70 70 0 0 0 120 50" fill="none" stroke="#198754" stroke-width="5" marker-end="url(#arc-fwd-l)"/>
+      <path d="M190 120 A70 70 0 0 1 120 190" fill="none" stroke="#b26a00" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#arc-back-l)"/>
+
+      <g>
+        <rect x="178" y="104" width="24" height="32" rx="5" fill="#1f2937"/>
+        <circle cx="190" cy="120" r="2.2" fill="#ffffff"/>
+        <line x1="190" y1="104" x2="190" y2="82" stroke="#2563eb" stroke-width="3"/>
+        <path d="M184 88 L190 80 L196 88" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+
+      <text x="18" y="26" font-size="12" fill="#198754">сплошная: angle/distance &gt; 0 (вперед)</text>
+      <text x="18" y="44" font-size="12" fill="#b26a00">пунктир: angle/distance &lt; 0 (назад)</text>
+    </svg>
+  </figure>
+</div>
+
+<div class="arc-sign-note">
+  <span><code>arc(120, angle=90)</code> → вперед по дуге, центр справа (поворот вправо)</span>
+  <span><code>arc(-120, angle=90)</code> → вперед по дуге, центр слева (поворот влево)</span>
+</div>
+
 ### Мини-примеры миграции
 
 ```python
