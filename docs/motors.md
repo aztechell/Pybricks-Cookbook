@@ -2,13 +2,6 @@
 
 ## Моторы SPIKE Prime и Powered UP
 
-!!! info "Важно про сравнение цифр"
-    В этой таблице используются **разные источники и условия измерения**:
-
-    - **SPIKE Prime 45602 / 45603**: официальные тех. характеристики LEGO Education (**7.2V**, значения с допуском `±15%`).
-    - **Все значения с подписью `(Philo, 7.5V)`**: для сопоставления со SPIKE использована строка **`7.5V`** из Philo (это ближайшее к номиналу аккумулятора SPIKE Prime ~`7.4V`), раздел **Loaded characteristics** (не `No-load characteristics`).
-    - **Powered UP 88018**: на странице LEGO есть описание и совместимость, но **числовых RPM/torque нет**.
-
 | Мотор | Система | Скорость (RPM) | Крутящий момент (N·cm) | Источник / условия |
 | :--- | :--- | :--- | :--- | :--- |
 | [Technic Large Angular Motor (45602)](https://education.lego.com/en-us/products/lego-technic-large-angular-motor/45602/)<br><img src="../img/large_angular_motor_45602.jpg" width="64" alt="45602"> | SPIKE Prime | `175` (без нагрузки)<br>`135` (макс. эффективность)<br>`≈126` (Philo, `7.5V`) | `8` (макс. эффективность)<br>`25` (стопор)<br>`≈8.47` (Philo, `7.5V`) | [LEGO Education Tech Specs (PDF)](https://le-www-live-s.legocdn.com/sc/media/files/support/spike-prime/techspecs_techniclargeangularmotor-1b79e2f4fbb292aaf40c97fec0c31fff.pdf)<br>`7.2V`, `±15%`<br>[Philo motor comparison](https://philohome.com/motors/motorcomp.htm)<br>`Spike L`, `Loaded characteristics`, строка `7.5V` |
