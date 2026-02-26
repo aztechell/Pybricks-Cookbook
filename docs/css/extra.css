@@ -4,12 +4,16 @@
 
 .arc-signs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
+  justify-content: start;
+  align-items: start;
   gap: 12px;
   margin: 0.8rem 0 0.5rem;
 }
 
 .arc-sign-card {
+  width: 100%;
+  max-width: 420px;
   margin: 0;
   padding: 10px;
   border: 1px solid #d7dee7;
@@ -27,6 +31,8 @@
 .arc-sign-svg {
   display: block;
   width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
   height: auto;
 }
 

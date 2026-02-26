@@ -196,6 +196,24 @@ drive_base.arc(radius, distance=300)
 
 Именно из-за этой разницы старые вызовы с отрицательными значениями при переходе на `arc()` нужно перепроверять на роботе.
 
+### Мини-примеры миграции
+
+```python
+# Было (curve): вперед и вправо
+drive_base.curve(120, 90)
+
+# Стало (arc): вперед и вправо
+drive_base.arc(120, angle=90)
+```
+
+```python
+# Было (curve): вперед и влево
+drive_base.curve(120, -90)
+
+# Стало (arc): вперед и влево
+drive_base.arc(-120, angle=90)
+```
+
 ### Наглядно: `drive_base.arc(radius, angle=...)`
 
 Робот на схемах стартует в центре и смотрит вверх (стрелка).  
@@ -275,21 +293,3 @@ drive_base.arc(radius, distance=300)
   <span><code>arc(120, angle=90)</code> → вперед по дуге, центр справа (поворот вправо)</span>
   <span><code>arc(-120, angle=90)</code> → вперед по дуге, центр слева (поворот влево)</span>
 </div>
-
-### Мини-примеры миграции
-
-```python
-# Было (curve): вперед и вправо
-drive_base.curve(120, 90)
-
-# Стало (arc): вперед и вправо
-drive_base.arc(120, angle=90)
-```
-
-```python
-# Было (curve): вперед и влево
-drive_base.curve(120, -90)
-
-# Стало (arc): вперед и влево
-drive_base.arc(-120, angle=90)
-```
