@@ -32,6 +32,7 @@ nav:
   - Продвинутый код:
       - Советы: tips.md
       - Async: await_in_pybricks.md
+      - Баги: bugs.md
   - Конструкции:
     - Studio 2.0: studio.md
   
