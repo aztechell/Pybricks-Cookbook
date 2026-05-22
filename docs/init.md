@@ -102,6 +102,6 @@ sensor = ColorSensor(Port.C)
 
 # Логика
 print("Start!")
-drivebase.straight(500) # Проехать 500 мм вперед
+robot.straight(500) # Проехать 500 мм вперед
 wait(1000)
 ```
