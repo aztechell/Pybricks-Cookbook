@@ -33,6 +33,8 @@ nav:
       - Советы: tips.md
       - Async: await_in_pybricks.md
       - Баги: bugs.md
+  - Прошивка:
+      - Сборка из исходников: firmware.md
   - Конструкции:
     - Studio 2.0: studio.md
   
