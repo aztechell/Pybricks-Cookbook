@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Сборка из исходников - Pybricks Cookbook</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/tabs.css" rel="stylesheet" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../css/arc_demo.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u0421\u0431\u043e\u0440\u043a\u0430 \u0438\u0437 \u0438\u0441\u0445\u043e\u0434\u043d\u0438\u043a\u043e\u0432";
+        var mkdocs_page_input_path = "firmware.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Введение</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Словарь</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Установка</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../primehub/">Spike PRIME hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Базовый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../create_code/">Создание кода</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../init/">Инициализация</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../func/">Функции</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../structure/">Структура</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../db/">Drive Base</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motors/">Управление моторами</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Продвинутый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../tips/">Советы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../await_in_pybricks/">Async</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../odometry/">Одометрия</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bugs/">Баги</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Прошивка</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Сборка из исходников</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Что получится в конце</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Проверенная среда</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. Установите инструменты</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#cygwin">Cygwin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#arm-gnu-toolchain">Arm GNU Toolchain</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#python-poetry">Python и Poetry</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. Получите исходники</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-python-">3. Подготовьте Python-окружение</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-mpy-cross">4. Соберите mpy-cross</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-spike-prime">5. Соберите прошивку для SPIKE Prime</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-firmwarezip">6. Установка своего firmware.zip</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Частые ошибки</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#make-command-not-found">make: command not found</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#arm-none-eabi-gcc-command-not-found">arm-none-eabi-gcc: command not found</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#modulenotfounderror">ModuleNotFoundError во время сборки</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#submodules">Ошибка submodules</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lto-wrapperexe-fatal-error-make-returned-2-exit-status">lto-wrapper.exe: fatal error: make returned 2 exit status</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">Полезные ссылки</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Конструкции</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../studio/">Studio 2.0</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Pybricks Cookbook</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Прошивка</li>
+      <li class="breadcrumb-item active">Сборка из исходников</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pybricks">Сборка прошивки Pybricks</h1>
+<p>Иногда стандартной прошивки с <a href="https://code.pybricks.com/">code.pybricks.com</a> недостаточно: нужно проверить свежий <code>master</code>, изменить код Pybricks или собрать прошивку с локальными правками. В этом случае собирают файл <code>firmware.zip</code> из исходников <code>pybricks-micropython</code>.</p>
+<details class="warning">
+<summary>Важно</summary>
+<p>Самостоятельная сборка нужна только если вы понимаете, зачем меняете прошивку. Для обычной установки Pybricks используйте готовую прошивку через браузер.</p>
+</details>
+<h2 id="_1">Что получится в конце</h2>
+<p>После успешной сборки для SPIKE Prime Hub появится файл:</p>
+<div class="highlight"><pre><span></span><code>bricks/primehub/build/firmware.zip
+</code></pre></div>
+<p>Внутри архива должны быть три файла:</p>
+<div class="highlight"><pre><span></span><code>firmware-base.bin
+firmware.metadata.json
+ReadMe_OSS.txt
+</code></pre></div>
+<p>Именно такой состав ожидают инструменты Pybricks для прошивки хаба.</p>
+<h2 id="_2">Проверенная среда</h2>
+<p>Эти шаги были проверены на Windows с Cygwin.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Инструмент</th>
+<th style="text-align: left;">Проверенная версия</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Python</td>
+<td style="text-align: left;">3.12.10</td>
+</tr>
+<tr>
+<td style="text-align: left;">Poetry</td>
+<td style="text-align: left;">1.8.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cygwin make</td>
+<td style="text-align: left;">GNU Make 4.4.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cygwin zip</td>
+<td style="text-align: left;">Zip 3.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cygwin MinGW GCC</td>
+<td style="text-align: left;">13.4.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Arm GNU Toolchain</td>
+<td style="text-align: left;">13.3.rel1, <code>arm-none-eabi-gcc</code> 13.3.1</td>
+</tr>
+</tbody>
+</table>
+<details class="note">
+<summary>Почему не 10-2020-q4-major?</summary>
+<p>Старый GNU Arm Embedded Toolchain 10.2.1 доходит до линковки, но на текущем <code>master</code> Pybricks падает с ошибкой <code>lto-wrapper.exe: fatal error: make returned 2 exit status</code>. Рабочая сборка получилась с Arm GNU Toolchain 13.3.rel1, который соответствует текущим рекомендациям Pybricks.</p>
+</details>
+<h2 id="1">1. Установите инструменты</h2>
+<h3 id="cygwin">Cygwin</h3>
+<p>Установите <a href="https://www.cygwin.com/">Cygwin</a> и выберите пакеты:</p>
+<div class="highlight"><pre><span></span><code>coreutils
+doxygen
+graphviz
+make
+mingw64-x86_64-gcc-core
+python3
+zip
+</code></pre></div>
+<p><code>coreutils</code> нужен для базовых команд вроде <code>cat</code>, <code>cp</code>, <code>ln</code>, которые используют скрипты установки и сборки.</p>
+<h3 id="arm-gnu-toolchain">Arm GNU Toolchain</h3>
+<p>Скачайте Windows-архив <a href="https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads">Arm GNU Toolchain 13.3.rel1</a>:</p>
+<div class="highlight"><pre><span></span><code>arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi.zip
+</code></pre></div>
+<p>Распакуйте его, например в:</p>
+<div class="highlight"><pre><span></span><code>C:\Tools\arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi
+</code></pre></div>
+<h3 id="python-poetry">Python и Poetry</h3>
+<p>Установите Python 3.12 и Poetry. Если Python уже установлен, Poetry можно поставить так:</p>
+<div class="highlight"><pre><span></span><code><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">12</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pipx</span>
+<span class="n">pipx</span> <span class="n">install</span> <span class="n">poetry</span>
+</code></pre></div>
+<h2 id="2">2. Получите исходники</h2>
+<p>Клонируйте <code>pybricks-micropython</code> без <code>--recursive</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">pybricks</span><span class="p">/</span><span class="n">pybricks-micropython</span>
+<span class="nb">cd </span><span class="n">pybricks-micropython</span>
+</code></pre></div>
+<p>Submodules подтянутся сами во время <code>make</code>. Так быстрее, потому что MicroPython содержит много submodules, которые Pybricks не использует.</p>
+<h2 id="3-python-">3. Подготовьте Python-окружение</h2>
+<p>В папке <code>pybricks-micropython</code> создайте Poetry-окружение:</p>
+<div class="highlight"><pre><span></span><code><span class="n">poetry</span> <span class="n">env</span> <span class="n">use</span> <span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\&lt;</span><span class="n">user</span><span class="p">&gt;\</span><span class="n">AppData</span><span class="p">\</span><span class="n">Local</span><span class="p">\</span><span class="n">Programs</span><span class="p">\</span><span class="n">Python</span><span class="p">\</span><span class="n">Python312</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span>
+<span class="n">poetry</span> <span class="n">install</span>
+</code></pre></div>
+<p>Если Python установлен в другом месте, замените путь на свой. Проверить путь к Python внутри окружения можно так:</p>
+<div class="highlight"><pre><span></span><code><span class="n">poetry</span> <span class="n">env</span> <span class="n">info</span> <span class="p">-</span><span class="n">-executable</span>
+</code></pre></div>
+<p>Для следующих команд нужен именно этот Python из Poetry-окружения. В примерах ниже предполагается, что он находится здесь:</p>
+<div class="highlight"><pre><span></span><code>C:\Projects\pybricks-micropython\.venv\Scripts\python.exe
+</code></pre></div>
+<h2 id="4-mpy-cross">4. Соберите <code>mpy-cross</code></h2>
+<p>Откройте Cygwin terminal или запустите <code>bash.exe</code> из Cygwin. Перейдите в папку исходников и добавьте Arm toolchain в <code>PATH</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/cygdrive/c/Projects/pybricks-micropython
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/cygdrive/c/Tools/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHON</span><span class="o">=</span>/cygdrive/c/Projects/pybricks-micropython/.venv/Scripts/python.exe
+</code></pre></div>
+<p>Соберите <code>mpy-cross</code>:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>mpy-cross<span class="w"> </span>-j8<span class="w"> </span><span class="nv">PYTHON</span><span class="o">=</span><span class="nv">$PYTHON</span>
+</code></pre></div>
+<p><code>mpy-cross</code> компилирует Python-модули в формат MicroPython. Без него сборка прошивки не дойдет до конца.</p>
+<h2 id="5-spike-prime">5. Соберите прошивку для SPIKE Prime</h2>
+<p>Для SPIKE Prime Hub используется target <code>primehub</code>:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>-C<span class="w"> </span>bricks/primehub<span class="w"> </span>-j8<span class="w"> </span><span class="nv">PYTHON</span><span class="o">=</span><span class="nv">$PYTHON</span>
+</code></pre></div>
+<p>Успешная сборка заканчивается строками примерно такого вида:</p>
+<div class="highlight"><pre><span></span><code>BIN creating firmware base file
+META creating firmware metadata
+ZIP creating firmware package
+  adding: firmware-base.bin
+  adding: firmware.metadata.json
+  adding: ReadMe_OSS.txt
+</code></pre></div>
+<p>Проверьте архив:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$PYTHON</span><span class="w"> </span>-m<span class="w"> </span>zipfile<span class="w"> </span>-l<span class="w"> </span>bricks/primehub/build/firmware.zip
+</code></pre></div>
+<h2 id="6-firmwarezip">6. Установка своего <code>firmware.zip</code></h2>
+<p>Физическую прошивку хаба выполняйте только если уверены, что собрали нужную версию.</p>
+<ol>
+<li>Откройте <a href="https://code.pybricks.com/">code.pybricks.com</a> в Chrome или Edge.</li>
+<li>Откройте установку прошивки Pybricks.</li>
+<li>Перейдите в расширенный режим выбора прошивки.</li>
+<li>Выберите файл <code>bricks/primehub/build/firmware.zip</code>.</li>
+<li>Переведите SPIKE Prime Hub в DFU-режим и выполните установку так же, как при обычной установке Pybricks.</li>
+</ol>
+<p>Если нужно вернуть заводскую прошивку, используйте официальный LEGO SPIKE app или пункт восстановления официальной прошивки в Pybricks.</p>
+<h2 id="_3">Частые ошибки</h2>
+<h3 id="make-command-not-found"><code>make: command not found</code></h3>
+<p>Cygwin не добавлен в <code>PATH</code>, или пакет <code>make</code> не установлен. Проверьте:</p>
+<div class="highlight"><pre><span></span><code>which<span class="w"> </span>make
+make<span class="w"> </span>--version
+</code></pre></div>
+<h3 id="arm-none-eabi-gcc-command-not-found"><code>arm-none-eabi-gcc: command not found</code></h3>
+<p>Arm toolchain не добавлен в <code>PATH</code>. Проверьте:</p>
+<div class="highlight"><pre><span></span><code>which<span class="w"> </span>arm-none-eabi-gcc
+arm-none-eabi-gcc<span class="w"> </span>--version
+</code></pre></div>
+<h3 id="modulenotfounderror"><code>ModuleNotFoundError</code> во время сборки</h3>
+<p>Сборка запущена не тем Python. Укажите Python из Poetry-окружения явно:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>-C<span class="w"> </span>bricks/primehub<span class="w"> </span>-j8<span class="w"> </span><span class="nv">PYTHON</span><span class="o">=</span>/cygdrive/c/Projects/pybricks-micropython/.venv/Scripts/python.exe
+</code></pre></div>
+<h3 id="submodules">Ошибка submodules</h3>
+<p>Не клонируйте репозиторий с <code>--recursive</code>. Если сеть оборвалась во время первого <code>make</code>, просто повторите команду сборки. Make сам продолжит подтягивать нужные submodules.</p>
+<h3 id="lto-wrapperexe-fatal-error-make-returned-2-exit-status"><code>lto-wrapper.exe: fatal error: make returned 2 exit status</code></h3>
+<p>Если это случилось на Arm GCC 10.2.1 из <code>10-2020-q4-major</code>, поставьте Arm GNU Toolchain 13.3.rel1, очистите старые объектные файлы и пересоберите:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>-C<span class="w"> </span>bricks/primehub<span class="w"> </span>clean
+make<span class="w"> </span>-C<span class="w"> </span>bricks/primehub<span class="w"> </span>-j8<span class="w"> </span><span class="nv">PYTHON</span><span class="o">=</span><span class="nv">$PYTHON</span>
+</code></pre></div>
+<h2 id="_4">Полезные ссылки</h2>
+<ul>
+<li><a href="https://github.com/pybricks/pybricks-micropython">pybricks-micropython на GitHub</a></li>
+<li><a href="https://github.com/pybricks/pybricks-micropython/blob/master/CONTRIBUTING.md">CONTRIBUTING.md Pybricks</a></li>
+<li><a href="https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads">Arm GNU Toolchain downloads</a></li>
+<li><a href="https://docs.pybricks.com/projects/pybricksdev/en/latest/api/firmware.html">Описание формата <code>firmware.zip</code></a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../bugs/" class="btn btn-neutral float-left" title="Баги"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../studio/" class="btn btn-neutral float-right" title="Studio 2.0">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../bugs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../studio/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/arc_demo.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

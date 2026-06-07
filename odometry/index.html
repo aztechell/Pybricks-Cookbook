@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Одометрия - Pybricks Cookbook</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/tabs.css" rel="stylesheet" />
+        <link href="../css/extra.css" rel="stylesheet" />
+        <link href="../css/arc_demo.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u041e\u0434\u043e\u043c\u0435\u0442\u0440\u0438\u044f";
+        var mkdocs_page_input_path = "odometry.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Введение</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../glossary/">Словарь</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Установка</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../primehub/">Spike PRIME hub</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Базовый код</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../create_code/">Создание кода</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../init/">Инициализация</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../func/">Функции</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../structure/">Структура</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../db/">Drive Base</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../motors/">Управление моторами</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Продвинутый код</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../tips/">Советы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../await_in_pybricks/">Async</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Одометрия</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Карта сверху</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Что измеряем</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. Мотор</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. Энкодер</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3. Градусы в миллиметры</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. Тип базы: дифференциальная или рулевая</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">Дифференциальная база</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">Робот с рулевым управлением</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-imu">5. IMU</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-x-y">6. X и Y</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">Один шаг обновления</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">Одометрия должна работать всегда</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_8">Минимальный код</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#imu">Энкодеры и IMU</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_9">Частые ошибки</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_10">Неверный диаметр колеса</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_11">Неправильное направление моторов</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_12">Проскальзывание</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#imu_1">IMU на наклонной поверхности</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_13">Сброс во время движения</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_14">Что дальше</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bugs/">Баги</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Прошивка</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../firmware/">Сборка из исходников</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Конструкции</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../studio/">Studio 2.0</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Pybricks Cookbook</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Продвинутый код</li>
+      <li class="breadcrumb-item active">Одометрия</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">Одометрия</h1>
+<p>Одометрия - это способ отвечать на простой вопрос: <strong>где сейчас робот?</strong></p>
+<p>Робот не видит поле сверху. Он только читает свои датчики и постепенно ведет
+внутреннюю запись:</p>
+<div class="highlight"><pre><span></span><code>X = где робот по горизонтали, мм
+Y = где робот по вертикали, мм
+heading = куда робот смотрит, градусы
+</code></pre></div>
+<p>Если совсем просто: одометрия - это <strong>дневник маленьких перемещений</strong>. Робот не
+знает свою позицию магически. Он много раз подряд записывает: "я проехал еще
+чуть-чуть вот в этом направлении".</p>
+<p>Самая простая цепочка выглядит так: мотор дает вращение, энкодер дает градусы,
+колесо переводит градусы в миллиметры, IMU дает курс, а программа обновляет
+<code>X/Y/heading</code>.</p>
+<p>Та же идея как поток данных:</p>
+<p><img src="../img/odometry-flow.png" width="520" alt="Поток данных одометрии: мотор и энкодер дают расстояние, IMU дает курс, вместе получается X/Y/heading"></p>
+<p>Идея не в том, что робот один раз "узнал координаты". Идея в том, что программа
+много раз в секунду делает маленькое обновление:</p>
+<ol>
+<li>Сколько повернулись колеса?</li>
+<li>Сколько миллиметров проехал центр робота?</li>
+<li>Куда робот был повернут в этот момент?</li>
+<li>На сколько изменить <code>X</code> и <code>Y</code>?</li>
+</ol>
+<h2 id="_2">Карта сверху</h2>
+<p>Для статьи договоримся о такой простой системе координат:</p>
+<p><img src="../img/odometry-map.png" width="520" alt="Карта координат: X вправо, Y вверх, движение раскладывается через dist_mm и heading"></p>
+<p>Это учебная схема. На реальном роботе главное не название осей, а постоянная
+договоренность: где ноль, куда растет <code>X</code>, куда растет <code>Y</code>, и какой знак у
+поворота.</p>
+<h2 id="_3">Что измеряем</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Часть</th>
+<th style="text-align: left;">Что читаем</th>
+<th style="text-align: left;">Единицы</th>
+<th style="text-align: left;">Зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Мотор</td>
+<td style="text-align: left;"><code>motor.angle()</code></td>
+<td style="text-align: left;">градусы</td>
+<td style="text-align: left;">Узнать, насколько повернулось колесо.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Колесо</td>
+<td style="text-align: left;">диаметр <code>D</code></td>
+<td style="text-align: left;">мм</td>
+<td style="text-align: left;">Перевести градусы колеса в путь по полу.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Дифференциальная база</td>
+<td style="text-align: left;">левый и правый путь</td>
+<td style="text-align: left;">мм</td>
+<td style="text-align: left;">Оценить путь центра робота по двум ведущим колесам.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Рулевая база</td>
+<td style="text-align: left;">путь ведущего колеса/колес</td>
+<td style="text-align: left;">мм</td>
+<td style="text-align: left;">Оценить, сколько проехал робот с рулевым управлением.</td>
+</tr>
+<tr>
+<td style="text-align: left;">IMU</td>
+<td style="text-align: left;"><code>hub.imu.heading()</code></td>
+<td style="text-align: left;">градусы</td>
+<td style="text-align: left;">Узнать, куда робот смотрит.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Одометрия</td>
+<td style="text-align: left;"><code>X</code>, <code>Y</code>, <code>heading</code></td>
+<td style="text-align: left;">мм и градусы</td>
+<td style="text-align: left;">Хранить текущую позицию робота.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1">1. Мотор</h2>
+<p>Мотор вращает колесо. Но команда мотора сама по себе не говорит, где робот.</p>
+<div class="highlight"><pre><span></span><code><span class="n">left_motor</span><span class="o">.</span><span class="n">dc</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">right_motor</span><span class="o">.</span><span class="n">dc</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+</code></pre></div>
+<p>Этот код означает только "крути моторы". Робот может поехать вперед, может
+проскользнуть, может упереться в стену. Для одометрии нам нужны не команды, а
+измерения.</p>
+<h2 id="2">2. Энкодер</h2>
+<p>В Powered Up / SPIKE моторах есть датчик вращения. В Pybricks он читается так:</p>
+<div class="highlight"><pre><span></span><code><span class="n">left_angle</span> <span class="o">=</span> <span class="n">left_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+<span class="n">right_angle</span> <span class="o">=</span> <span class="n">right_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+</code></pre></div>
+<p><code>angle()</code> возвращает накопленный угол мотора в градусах.</p>
+<p>Энкодер можно представить как счетчик на колесе: он не говорит "робот стоит в
+точке X=300", он говорит только "колесо повернулось на столько-то градусов".</p>
+<div class="highlight"><pre><span></span><code>0°       колесо еще не повернулось
+90°      четверть оборота
+180°     половина оборота
+360°     один полный оборот
+720°     два полных оборота
+</code></pre></div>
+<p>Нас интересует не сам текущий угол, а <strong>разница</strong> с прошлым измерением:</p>
+<div class="highlight"><pre><span></span><code><span class="n">current_left</span> <span class="o">=</span> <span class="n">left_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+<span class="n">d_left</span> <span class="o">=</span> <span class="n">current_left</span> <span class="o">-</span> <span class="n">previous_left</span>
+<span class="n">previous_left</span> <span class="o">=</span> <span class="n">current_left</span>
+</code></pre></div>
+<p>Если было <code>1200°</code>, стало <code>1260°</code>, значит за этот шаг колесо повернулось на
+<code>60°</code>.</p>
+<h2 id="3">3. Градусы в миллиметры</h2>
+<p>Один полный оборот колеса - это путь, равный длине окружности:</p>
+<div class="highlight"><pre><span></span><code>длина окружности = pi * D
+</code></pre></div>
+<p><img src="../img/odometry-wheel-distance.png" width="520" alt="Один оборот колеса равен пути pi умножить на диаметр колеса"></p>
+<p>Где <code>D</code> - диаметр колеса в миллиметрах.</p>
+<p>Если 360 градусов дают <code>pi * D</code> миллиметров, то 1 градус дает:</p>
+<div class="highlight"><pre><span></span><code><span class="n">wheel_mm_per_deg</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">wheel_diameter_mm</span> <span class="o">/</span> <span class="mi">360</span>
+</code></pre></div>
+<p>Для колеса <code>62.4 мм</code>:</p>
+<div class="highlight"><pre><span></span><code>wheel_mm_per_deg = pi * 62.4 / 360
+                 ≈ 0.544 мм за 1 градус
+</code></pre></div>
+<p>Тогда путь одного колеса:</p>
+<div class="highlight"><pre><span></span><code><span class="n">left_mm</span> <span class="o">=</span> <span class="n">d_left</span> <span class="o">*</span> <span class="n">wheel_mm_per_deg</span>
+<span class="n">right_mm</span> <span class="o">=</span> <span class="n">d_right</span> <span class="o">*</span> <span class="n">wheel_mm_per_deg</span>
+</code></pre></div>
+<h2 id="4">4. Тип базы: дифференциальная или рулевая</h2>
+<p>Одометрия зависит от конструкции базы. Не все роботы устроены одинаково.</p>
+<p><img src="../img/odometry-drive-types.png" width="560" alt="Сравнение дифференциальной базы и робота с рулевым управлением"></p>
+<h3 id="_4">Дифференциальная база</h3>
+<p>У дифференциального робота левое и правое ведущие колеса могут ехать с разной
+скоростью. Если левое колесо прошло один путь, а правое другой, центр робота
+примерно проходит среднее расстояние между ними:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dist_mm</span> <span class="o">=</span> <span class="p">(</span><span class="n">left_mm</span> <span class="o">+</span> <span class="n">right_mm</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</code></pre></div>
+<p>То же самое можно записать короче, если <code>d_left</code> и <code>d_right</code> в градусах:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dist_mm</span> <span class="o">=</span> <span class="p">(</span><span class="n">d_left</span> <span class="o">+</span> <span class="n">d_right</span><span class="p">)</span> <span class="o">*</span> <span class="n">wheel_mm_per_deg</span> <span class="o">/</span> <span class="mi">2</span>
+</code></pre></div>
+<p>Разница между левым и правым колесом создает поворот. Но в простой одометрии из
+этого раздела курс мы берем не из разницы колес, а из IMU. Так меньше ошибка,
+если одно колесо немного проскользнуло.</p>
+<h3 id="_5">Робот с рулевым управлением</h3>
+<p>У робота с рулевым управлением логика другая: ведущее колесо или колеса дают
+расстояние, рулевой механизм физически направляет колеса, а IMU показывает, куда
+реально смотрит весь робот.</p>
+<p>Для базовой одометрии можно оставить ту же идею: путь берем по энкодеру ведущего
+колеса, а <code>heading</code> берем из IMU.</p>
+<p>Так статья дальше показывает общую схему: <strong>сначала считаем расстояние, потом
+накладываем курс IMU, потом обновляем <code>X/Y</code></strong>.</p>
+<h2 id="5-imu">5. IMU</h2>
+<p>Энкодеры хорошо говорят "сколько проехали колеса", но плохо говорят "куда сейчас
+смотрит робот", особенно если колеса проскальзывают.</p>
+<p>Для направления удобно использовать IMU хаба:</p>
+<div class="highlight"><pre><span></span><code><span class="n">heading_deg</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">imu</span><span class="o">.</span><span class="n">heading</span><span class="p">()</span>
+</code></pre></div>
+<p>Перед стартом обычно задают ноль:</p>
+<div class="highlight"><pre><span></span><code><span class="n">hub</span><span class="o">.</span><span class="n">imu</span><span class="o">.</span><span class="n">reset_heading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>Теперь робот может хранить курс:</p>
+<div class="highlight"><pre><span></span><code>heading = 0°    смотрим вдоль X+
+heading = 90°   смотрим вдоль Y+
+heading = -90°  смотрим в другую сторону по Y
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Проверьте знак на своем роботе</p>
+<p>Поверните робота на 90 градусов и выведите <code>hub.imu.heading()</code>. Если ось <code>Y</code>
+растет не туда, поменяйте знак в формуле или в своей системе координат.</p>
+</div>
+<h2 id="6-x-y">6. X и Y</h2>
+<p>Теперь есть две вещи:</p>
+<div class="highlight"><pre><span></span><code>dist_mm      сколько проехал центр робота
+heading_deg  куда робот смотрел
+</code></pre></div>
+<p>Представьте, что <code>dist_mm</code> - это длина шага, а <code>heading_deg</code> - направление
+шага. Если шаг направлен вправо, почти все добавится в <code>X</code>. Если вверх - почти
+все добавится в <code>Y</code>. Если по диагонали - часть шага уйдет в <code>X</code>, часть в <code>Y</code>.</p>
+<p>Чтобы разложить движение на <code>X</code> и <code>Y</code>, используем синус и косинус:</p>
+<div class="highlight"><pre><span></span><code><span class="n">x_mm</span> <span class="o">+=</span> <span class="n">dist_mm</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">heading_deg</span><span class="p">))</span>
+<span class="n">y_mm</span> <span class="o">+=</span> <span class="n">dist_mm</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">heading_deg</span><span class="p">))</span>
+</code></pre></div>
+<p>Эту формулу не нужно заучивать как "магическую". Она просто отвечает на вопрос:
+какая часть шага идет вправо-влево (<code>X</code>), а какая часть вверх-вниз (<code>Y</code>).</p>
+<p>На карте это выглядит как маленький шаг из старой точки в новую. Чем чаще мы
+делаем такие шаги, тем точнее получается траектория.</p>
+<p>Если <code>heading = 0°</code>, весь путь идет в <code>X</code>:</p>
+<div class="highlight"><pre><span></span><code>cos(0°) = 1
+sin(0°) = 0
+X += dist
+Y += 0
+</code></pre></div>
+<p>Если <code>heading = 90°</code>, весь путь идет в <code>Y</code>:</p>
+<div class="highlight"><pre><span></span><code>cos(90°) = 0
+sin(90°) = 1
+X += 0
+Y += dist
+</code></pre></div>
+<h2 id="_6">Один шаг обновления</h2>
+<p>Один вызов <code>update_odometry()</code> можно представить как один кадр:
+мы читаем новые углы, сравниваем их со старыми, считаем новый маленький путь и
+сразу добавляем его к <code>X/Y</code>.</p>
+<p>Это похоже на игру: если персонаж двигается, его позиция обновляется каждый
+кадр. У робота вместо кадров - частые вызовы <code>update_odometry()</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Шаг</th>
+<th style="text-align: left;">Было / читаем</th>
+<th style="text-align: left;">Что получаем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>previous_left</code>, <code>previous_right</code></td>
+<td style="text-align: left;">Старые углы моторов.</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>left_motor.angle()</code>, <code>right_motor.angle()</code></td>
+<td style="text-align: left;">Новые углы моторов.</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><code>d_left</code>, <code>d_right</code></td>
+<td style="text-align: left;">Насколько повернулись колеса за этот шаг.</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><code>wheel_mm_per_deg</code></td>
+<td style="text-align: left;">Перевод градусов в миллиметры.</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"><code>(d_left + d_right) / 2</code></td>
+<td style="text-align: left;">Путь центра робота.</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"><code>hub.imu.heading()</code></td>
+<td style="text-align: left;">Курс робота.</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"><code>cos()</code> и <code>sin()</code></td>
+<td style="text-align: left;">Новые <code>X</code> и <code>Y</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_7">Одометрия должна работать всегда</h2>
+<p>Одометрию нельзя запускать только после движения. Она должна обновляться <strong>во
+время</strong> движения.</p>
+<p><img src="../img/odometry-update-loop.png" width="560" alt="Одометрия обновляется параллельно движению: update_odometry вызывается регулярно во время движения"></p>
+<p>Если робот ехал 2 секунды, а <code>update_odometry()</code> в это время не вызывался, то
+программа не видела промежуточные шаги. Координаты могут потерять часть пути,
+особенно если робот поворачивал, буксовал или ехал по дуге.</p>
+<p>Правильная идея: движение началось, а <code>update_odometry()</code> продолжает вызываться
+много раз до самого конца маневра.</p>
+<p>В Pybricks это часто делают кооперативно:</p>
+<ol>
+<li>Запускаем движение с <code>wait=False</code>.</li>
+<li>Пока движение не завершилось, в цикле обновляем одометрию.</li>
+<li>Делаем <code>wait(10)</code>, чтобы не забивать хаб бесконечным циклом.</li>
+</ol>
+<p>Если программа устроена как несколько параллельных задач, смысл такой же:
+одометрия должна быть постоянной фоновой задачей, которая обновляется
+параллельно любым действиям робота.</p>
+<h2 id="_8">Минимальный код</h2>
+<p>Это не готовая библиотека, а короткий скелет, чтобы увидеть всю идею в одном
+месте.</p>
+<p>Не пытайтесь сразу запомнить весь код. Сначала ищите в нем знакомую цепочку:
+энкодер дал градусы, градусы стали миллиметрами, IMU дала курс, <code>X/Y</code>
+изменились.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.hubs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrimeHub</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.pupdevices</span><span class="w"> </span><span class="kn">import</span> <span class="n">Motor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">Port</span><span class="p">,</span> <span class="n">Direction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pybricks.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wait</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">umath</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">radians</span>
+
+<span class="n">hub</span> <span class="o">=</span> <span class="n">PrimeHub</span><span class="p">()</span>
+
+<span class="n">left_motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">COUNTERCLOCKWISE</span><span class="p">)</span>
+<span class="n">right_motor</span> <span class="o">=</span> <span class="n">Motor</span><span class="p">(</span><span class="n">Port</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+
+<span class="n">wheel_diameter_mm</span> <span class="o">=</span> <span class="mf">62.4</span>
+<span class="n">wheel_mm_per_deg</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">wheel_diameter_mm</span> <span class="o">/</span> <span class="mi">360</span>
+
+<span class="n">x_mm</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">y_mm</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">heading_deg</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">previous_left</span> <span class="o">=</span> <span class="n">left_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+<span class="n">previous_right</span> <span class="o">=</span> <span class="n">right_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+<span class="n">hub</span><span class="o">.</span><span class="n">imu</span><span class="o">.</span><span class="n">reset_heading</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>Обновление одометрии:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_odometry</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x_mm</span><span class="p">,</span> <span class="n">y_mm</span><span class="p">,</span> <span class="n">heading_deg</span>
+    <span class="k">global</span> <span class="n">previous_left</span><span class="p">,</span> <span class="n">previous_right</span>
+
+    <span class="n">current_left</span> <span class="o">=</span> <span class="n">left_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+    <span class="n">current_right</span> <span class="o">=</span> <span class="n">right_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+
+    <span class="n">d_left</span> <span class="o">=</span> <span class="n">current_left</span> <span class="o">-</span> <span class="n">previous_left</span>
+    <span class="n">d_right</span> <span class="o">=</span> <span class="n">current_right</span> <span class="o">-</span> <span class="n">previous_right</span>
+
+    <span class="n">previous_left</span> <span class="o">=</span> <span class="n">current_left</span>
+    <span class="n">previous_right</span> <span class="o">=</span> <span class="n">current_right</span>
+
+    <span class="n">dist_mm</span> <span class="o">=</span> <span class="p">(</span><span class="n">d_left</span> <span class="o">+</span> <span class="n">d_right</span><span class="p">)</span> <span class="o">*</span> <span class="n">wheel_mm_per_deg</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">heading_deg</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">imu</span><span class="o">.</span><span class="n">heading</span><span class="p">()</span>
+
+    <span class="n">x_mm</span> <span class="o">+=</span> <span class="n">dist_mm</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">heading_deg</span><span class="p">))</span>
+    <span class="n">y_mm</span> <span class="o">+=</span> <span class="n">dist_mm</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">heading_deg</span><span class="p">))</span>
+</code></pre></div>
+<p><code>global</code> здесь нужен только потому, что пример очень короткий: функция меняет
+переменные <code>x_mm</code>, <code>y_mm</code>, <code>heading_deg</code>, которые созданы выше. В большом
+проекте это обычно прячут в отдельный файл или готовую функцию робота.</p>
+<p>Сброс позиции:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">reset_odometry</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">heading</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">x_mm</span><span class="p">,</span> <span class="n">y_mm</span><span class="p">,</span> <span class="n">heading_deg</span>
+    <span class="k">global</span> <span class="n">previous_left</span><span class="p">,</span> <span class="n">previous_right</span>
+
+    <span class="n">x_mm</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">y_mm</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">heading_deg</span> <span class="o">=</span> <span class="n">heading</span>
+
+    <span class="n">hub</span><span class="o">.</span><span class="n">imu</span><span class="o">.</span><span class="n">reset_heading</span><span class="p">(</span><span class="n">heading</span><span class="p">)</span>
+    <span class="n">previous_left</span> <span class="o">=</span> <span class="n">left_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+    <span class="n">previous_right</span> <span class="o">=</span> <span class="n">right_motor</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+</code></pre></div>
+<p>Вариант 1: одометрия как постоянная телеметрия.</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">update_odometry</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">x_mm</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+          <span class="s2">&quot;Y:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">y_mm</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+          <span class="s2">&quot;H:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">heading_deg</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<p>Вариант 2: одометрия параллельно конкретному движению.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Если вы используете DriveBase, запускайте маневр без ожидания.</span>
+<span class="n">drive_base</span><span class="o">.</span><span class="n">straight</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Пока робот едет, одометрия продолжает обновляться.</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">drive_base</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
+    <span class="n">update_odometry</span><span class="p">()</span>
+    <span class="n">wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># После цикла координаты уже учитывают весь путь этого маневра.</span>
+</code></pre></div>
+<h2 id="imu">Энкодеры и IMU</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Источник</th>
+<th style="text-align: left;">Хорошо умеет</th>
+<th style="text-align: left;">Плохо умеет</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Энкодеры моторов</td>
+<td style="text-align: left;">Считать вращение колес.</td>
+<td style="text-align: left;">Видеть проскальзывание и удар о стену.</td>
+</tr>
+<tr>
+<td style="text-align: left;">IMU</td>
+<td style="text-align: left;">Держать направление робота.</td>
+<td style="text-align: left;">Измерять точное расстояние по полу.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Вместе</td>
+<td style="text-align: left;">Дать простую позицию <code>X/Y/heading</code>.</td>
+<td style="text-align: left;">Полностью убрать ошибки без калибровки.</td>
+</tr>
+</tbody>
+</table>
+<p>Поэтому простая одометрия часто устроена так: энкодеры отвечают за расстояние,
+IMU отвечает за курс, а <code>X/Y</code> показывают, где робот оказался.</p>
+<h2 id="_9">Частые ошибки</h2>
+<h3 id="_10">Неверный диаметр колеса</h3>
+<p>Если диаметр больше реального, робот будет думать, что проехал больше, чем на
+самом деле. Если меньше - будет думать, что проехал меньше.</p>
+<p>Проверка:</p>
+<div class="highlight"><pre><span></span><code>1. Сбросьте X/Y.
+2. Проедьте ровно 1000 мм по линейке.
+3. Посмотрите, что показывает X или Y.
+4. Подправьте wheel_diameter_mm.
+</code></pre></div>
+<h3 id="_11">Неправильное направление моторов</h3>
+<p>При движении вперед оба <code>d_left</code> и <code>d_right</code> должны быть одного знака. Если одно
+колесо дает плюс, а другое минус, сначала исправьте <code>Direction</code> при создании
+мотора.</p>
+<h3 id="_12">Проскальзывание</h3>
+<p>Если колесо крутится на месте, энкодер считает путь, которого не было. Поэтому
+одометрия по колесам всегда накапливает ошибку.</p>
+<p>Практическое решение: медленнее разгоняться, не давить в стену слишком долго и
+сбрасывать позицию у известных ориентиров: стены, линии или угла поля.</p>
+<h3 id="imu_1">IMU на наклонной поверхности</h3>
+<p>Для обычной FLL/робомиссии робот чаще всего едет по плоскому полю. Если робот
+поднимается на рампу или хаб установлен необычно, heading может вести себя иначе.
+Проверяйте направление хаба и при необходимости задавайте <code>top_side</code> и
+<code>front_side</code> при создании хаба.</p>
+<h3 id="_13">Сброс во время движения</h3>
+<p>Не сбрасывайте heading и координаты в середине маневра. Сначала остановите
+робота, выровняйте его по понятному ориентиру, потом делайте:</p>
+<div class="highlight"><pre><span></span><code><span class="n">reset_odometry</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">heading</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_14">Что дальше</h2>
+<p>Когда у робота есть <code>X</code>, <code>Y</code> и <code>heading</code>, можно писать более умные движения:</p>
+<div class="highlight"><pre><span></span><code>текущая точка:  X=120, Y=300
+цель:           X=700, Y=300
+
+робот считает:
+1. куда повернуть нос
+2. сколько осталось до цели
+3. как плавно уменьшить скорость перед точкой
+</code></pre></div>
+<p>Но это уже следующий слой. Сначала важно понять базу: мотор повернулся, энкодер
+дал градусы, колесо дало миллиметры, IMU дала направление, <code>X/Y</code> обновились.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../await_in_pybricks/" class="btn btn-neutral float-left" title="Async"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../bugs/" class="btn btn-neutral float-right" title="Баги">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../await_in_pybricks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../bugs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/arc_demo.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
