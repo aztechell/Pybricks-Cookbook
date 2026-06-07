@@ -32,6 +32,7 @@ nav:
   - Продвинутый код:
       - Советы: tips.md
       - Async: await_in_pybricks.md
+      - Одометрия: odometry.md
       - Баги: bugs.md
   - Прошивка:
       - Сборка из исходников: firmware.md
